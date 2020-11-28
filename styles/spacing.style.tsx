@@ -5,6 +5,7 @@ export default {
     mb1: { marginBottom: 10 },
     mb2: { marginBottom: 20 },
     mb3: { marginBottom: 30 },
+    mr1: { marginRight: 10 },
 
     my1: { marginTop: 10, marginBottom: 10 },
     my2: { marginTop: 20, marginBottom: 20 },
