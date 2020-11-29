@@ -1,4 +1,5 @@
 import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /* React Imports */
 import {
@@ -33,6 +34,8 @@ export function Login(props: any) {
 
     // Hooks.
     const [isLoggingIn, setLoggingIn] = React.useState(false);
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
 
     return (
         <PaperProvider>
@@ -42,8 +45,8 @@ export function Login(props: any) {
                     <Text style={{ marginTop: -5, fontSize: 50, letterSpacing: 5, fontWeight: 'bold' }}>MAJYK</Text>
                     <Text style={{ marginTop: 5, marginBottom: 30, fontSize: 14, letterSpacing: 0.5, fontWeight: 'bold' }}>SOCIAL INVESTMENTS</Text>
                     <View style={styles.inputContainer}>
-                        <TextInput label="💌 EMAIL" style={[InputStyle.input]} mode="outlined" theme={InputPaperTheme} keyboardType="email-address" />
-                        <TextInput label="🔑 PASSWORD" style={[InputStyle.input, SpacingStyle.mt1]} secureTextEntry={true} mode="outlined" theme={InputPaperTheme} />
+                        <TextInput label="💌 EMAIL" style={[InputStyle.input]} mode="outlined" theme={InputPaperTheme} keyboardType="email-address" onChangeText={text => setEmail(text)} />
+                        <TextInput label="🔑 PASSWORD" style={[InputStyle.input, SpacingStyle.mt1]} secureTextEntry={true} mode="outlined" theme={InputPaperTheme} onChangeText={text => setPassword(text)} />
                     </View>
                     <View style={styles.btnContainer}>
                         <Button icon="creation" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginRight: 5, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined">Register</Button>
@@ -60,23 +63,34 @@ export function Login(props: any) {
 
     function onLoginPress() {
 
+        setLoggingIn(true);
+
         fetch('https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/login', {
             method: 'POST',
             body: JSON.stringify({
-                email: "jdcpham@outlook.com",
-                password: "ILoveHSBC!"
+                email: email,
+                password: password
             })
-        }).catch(response => {
-            console.log(response)
+        }).then(response => response.json()).then(res => {
+            if (res.loggedIn) {
+
+                // Set Local Storage and then navigate to main page.
+                AsyncStorage.setItem('email', email).then(() => {
+                    setLoggingIn(false);
+                    navigation.navigate("Main");
+                })
+
+            } else {
+                setLoggingIn(false);
+                alert("Invalid email or password.")
+            }
+        }).catch(error => {
+
+            setLoggingIn(false);
+            alert("An error occurred.")
+
         })
 
-        // Set loading flag.
-        setLoggingIn(!isLoggingIn);
-
-        // Navigate to other page.
-        navigation.navigate("Main");
-
-    
     }
 
 }

@@ -13,8 +13,6 @@ import Dashboard from '../screens/dashboard';
 /* Icons */
 import { faCoffee, faCogs, faHome, faSnowboarding, faUserAlt, faWallet } from '@fortawesome/free-solid-svg-icons'
 
-
-
 const Tab = createBottomTabNavigator();
 
 function Main(props: any) {
