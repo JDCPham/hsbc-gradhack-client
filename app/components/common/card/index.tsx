@@ -1,58 +1,28 @@
 import React from 'react';
-import { SafeAreaView, Text, View, Image } from 'react-native';
-import { StatusBar, ScrollView, StyleSheet } from 'react-native';
-
-import Theme from '../../../../styles/theme.style';
+import { View, Image, Text, StyleSheet } from 'react-native';
 import Spacing from '../../../../styles/spacing.style';
+import Theme from '../../../../styles/theme.style';
 
-/* Components */
-import Header from '../../common/header';
-import Card from '../../common/card';
-
-function Dashboard(props: any) {
-
+function Card(props: any) {
     return (
-
-        <View>
-            <View style={{ backgroundColor: Theme.black }}>
-                <SafeAreaView>
-                    <Header />
-                </SafeAreaView>
-            </View>
-            <ScrollView style={styles.scrollView}>
-                <View style={styles.card}>
-                    <Text style={styles.greetingText}>Welcome back Kevin! 🚀</Text>
-                    <Image source={require('../../../assets/animations/daytime.gif')} style={{ width: 90, height: 80, borderWidth: 0, borderColor: 'blue' }} />
-                </View>
-
-                {/* Upcoming Activities */}
-                <View style={[Spacing.mt3, Spacing.mb1]}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.title}>Upcoming Activities</Text>
-                        <Text style={styles.titleAlt}>🚀</Text>
+        <View style={[styles.verticalCard, Spacing.mt1, { padding: 0 }]}>
+            <Image source={require(`../../../assets/${props.image}`)} style={{ width: '100%', height: 160 }} />
+            <View style={{ flexDirection: 'row', padding: 10 }}>
+                <View style={{ flexDirection: 'column' }}>
+                    <Text style={[styles.activitiesText1]}>{props.title}</Text>
+                    <Text style={[styles.activitiesText2]}>{props.location}</Text>
+                    <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                        <Text style={[styles.activitiesText3, { marginRight: 5 }]}>{props.timestamp}</Text>
+                        <Text style={[styles.activitiesText4, { marginRight: 5 }]}>{props.venue}</Text>
+                        <Text style={[styles.activitiesText5, { marginRight: 5 }]}>{props.price == 0 ? "FREE" : props.price}</Text>
                     </View>
-
-                    <Card
-                        image="animations/spinClass.jpg"
-                        title="Kevin's Yoga Class"
-                        location="Shanghai Bund"
-                        timestamp="13:00"
-                        venue="Some restaurant"
-                        price={0} />
-
-                    <Card
-                        image="animations/cookingClass.jpg"
-                        title="Kevin's Sausage Eating Class"
-                        location="Shanghai Bund"
-                        timestamp="13:00"
-                        venue="Kevin's House"
-                        price={0} />
-
                 </View>
-            </ScrollView>
+
+            </View>
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     scrollView: {
@@ -155,4 +125,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Dashboard;
+
+export default Card;
