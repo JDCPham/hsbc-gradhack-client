@@ -33,7 +33,7 @@ function Dashboard(props: any) {
                     </View>
 
                     <Card
-                        image="animations/spinClass.jpg"
+                        image="https://media.tacdn.com/media/attractions-splice-spp-674x446/06/6f/32/03.jpg"
                         title="Kevin's Yoga Class"
                         location="Shanghai Bund"
                         timestamp="13:00"
@@ -41,7 +41,7 @@ function Dashboard(props: any) {
                         price={0} />
 
                     <Card
-                        image="animations/cookingClass.jpg"
+                        image="https://media.tacdn.com/media/attractions-splice-spp-674x446/06/6f/32/03.jpg"
                         title="Kevin's Sausage Eating Class"
                         location="Shanghai Bund"
                         timestamp="13:00"

@@ -60,6 +60,16 @@ export function Login(props: any) {
 
     function onLoginPress() {
 
+        fetch('https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: "jdcpham@outlook.com",
+                password: "ILoveHSBC!"
+            })
+        }).catch(response => {
+            console.log(response)
+        })
+
         // Set loading flag.
         setLoggingIn(!isLoggingIn);
 

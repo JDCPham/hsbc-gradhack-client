@@ -4,9 +4,10 @@ import Spacing from '../../../../styles/spacing.style';
 import Theme from '../../../../styles/theme.style';
 
 function Card(props: any) {
+    
     return (
         <View style={[styles.verticalCard, Spacing.mt1, { padding: 0 }]}>
-            <Image source={require(`../../../assets/${props.image}`)} style={{ width: '100%', height: 160 }} />
+            <Image source={{uri: props.image}} style={{ width: '100%', height: 160 }} />
             <View style={{ flexDirection: 'row', padding: 10 }}>
                 <View style={{ flexDirection: 'column' }}>
                     <Text style={[styles.activitiesText1]}>{props.title}</Text>
