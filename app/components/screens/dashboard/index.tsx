@@ -1,5 +1,5 @@
-import React from 'react';
-import { SafeAreaView, Text, View, Image } from 'react-native';
+import React, { useEffect } from 'react';
+import { SafeAreaView, Text, View, Image, ActivityIndicator } from 'react-native';
 import { StatusBar, ScrollView, StyleSheet } from 'react-native';
 
 import Theme from '../../../../styles/theme.style';
@@ -8,10 +8,28 @@ import Spacing from '../../../../styles/spacing.style';
 /* Components */
 import Header from '../../common/header';
 import Card from '../../common/card';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Dashboard(props: any) {
 
-    return (
+    // React Hooks.
+    const [name, setName] = React.useState("null");
+    const [balance, setBalance] = React.useState("null");
+    const [activities, setActivities] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    // API Call: User Details and Upcoming Activities.
+    useEffect(() => {
+        AsyncStorage.getItem('email').then(email => {
+            if (email != null) getData(email, setName, setBalance, setActivities, setIsLoading);
+        })
+    }, [])
+    if (isLoading) return (
+        <View style={{ flex: 1, justifyContent: 'center', backgroundColor: Theme.primary }}>
+            <ActivityIndicator size="large" color={Theme.black} />
+        </View>
+    )
+    else return (
 
         <View>
             <View style={{ backgroundColor: Theme.black }}>
@@ -21,7 +39,7 @@ function Dashboard(props: any) {
             </View>
             <ScrollView style={styles.scrollView}>
                 <View style={styles.card}>
-                    <Text style={styles.greetingText}>Welcome back Kevin! 🚀</Text>
+                    <Text style={styles.greetingText}>Welcome back {name}! 👋</Text>
                     <Image source={require('../../../assets/animations/daytime.gif')} style={{ width: 90, height: 80, borderWidth: 0, borderColor: 'blue' }} />
                 </View>
 
@@ -32,27 +50,38 @@ function Dashboard(props: any) {
                         <Text style={styles.titleAlt}>🚀</Text>
                     </View>
 
-                    <Card
-                        image="https://media.tacdn.com/media/attractions-splice-spp-674x446/06/6f/32/03.jpg"
-                        title="Kevin's Yoga Class"
-                        location="Shanghai Bund"
-                        timestamp="13:00"
-                        venue="Some restaurant"
-                        price={0} />
-
-                    <Card
-                        image="https://media.tacdn.com/media/attractions-splice-spp-674x446/06/6f/32/03.jpg"
-                        title="Kevin's Sausage Eating Class"
-                        location="Shanghai Bund"
-                        timestamp="13:00"
-                        venue="Kevin's House"
-                        price={0} />
+                    {activities.map((activity, i) => {
+                        return (
+                            <Card
+                                key={i}
+                                image={activity['Image']}
+                                title={activity['Name']}
+                                location={activity['Location']}
+                                timestamp={activity['Timestamp']}
+                                venue={activity['Host']}
+                                price={activity['Cost']} />
+                        )
+                    })}
 
                 </View>
             </ScrollView>
         </View>
     );
 }
+
+
+function getData(email: any, setName: any, setBalance: any, setActivities: any, setIsLoading: any): void {
+    fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/user-details/${email}`, { method: 'GET' }).then(response => response.json()).then(res => {
+        setName(res['firstName'])
+        setBalance(res['balance'])
+
+        fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/upcoming-activities/${email}`, { method: 'GET' }).then(response => response.json()).then(res => {
+            setActivities(res);
+            setIsLoading(false);
+        })
+    })
+}
+
 
 const styles = StyleSheet.create({
     scrollView: {

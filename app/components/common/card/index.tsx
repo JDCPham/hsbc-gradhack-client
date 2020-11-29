@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 import Spacing from '../../../../styles/spacing.style';
 import Theme from '../../../../styles/theme.style';
+import moment from 'moment';
+import currency from 'currency.js';
 
 function Card(props: any) {
     
@@ -13,9 +15,9 @@ function Card(props: any) {
                     <Text style={[styles.activitiesText1]}>{props.title}</Text>
                     <Text style={[styles.activitiesText2]}>{props.location}</Text>
                     <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                        <Text style={[styles.activitiesText3, { marginRight: 5 }]}>{props.timestamp}</Text>
+                        <Text style={[styles.activitiesText3, { marginRight: 5 }]}>{moment(props.timestamp).format("DD/MM | HH:mm")}</Text>
                         <Text style={[styles.activitiesText4, { marginRight: 5 }]}>{props.venue}</Text>
-                        <Text style={[styles.activitiesText5, { marginRight: 5 }]}>{props.price == 0 ? "FREE" : props.price}</Text>
+                        <Text style={[styles.activitiesText5, { marginRight: 5 }]}>{props.price == 0 ? "FREE" : currency(props.price).format()}</Text>
                     </View>
                 </View>
 
