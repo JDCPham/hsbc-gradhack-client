@@ -2,21 +2,10 @@ import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /* React Imports */
-import {
-    KeyboardAvoidingView,
-    Platform,
-    StyleSheet,
-    Text,
-    View,
-    Image
-} from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, Image } from 'react-native';
 
 /* React Paper Imports */
-import {
-    Provider as PaperProvider,
-    TextInput,
-    Button
-} from 'react-native-paper';
+import { Provider as PaperProvider, TextInput, Button } from 'react-native-paper';
 
 /* Theming */
 import Theme from '../../../../styles/theme.style';
@@ -27,6 +16,10 @@ import { InputPaperTheme } from '../../../../styles/paper.style';
 import { ContainedButtonPaperTheme } from '../../../../styles/paper.style';
 import { OutlinedButtonPaperTheme } from '../../../../styles/paper.style';
 
+
+
+
+
 export function Login(props: any) {
 
     // Get Naviation Object.
@@ -36,6 +29,9 @@ export function Login(props: any) {
     const [isLoggingIn, setLoggingIn] = React.useState(false);
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+
+    // Check if already logged in.
+    AsyncStorage.getItem('email').then(email => { if (email != null) navigation.navigate("Main") });
 
     return (
         <PaperProvider>
