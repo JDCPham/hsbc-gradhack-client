@@ -34,7 +34,7 @@ function Dashboard(props: any) {
         <View>
             <View style={{ backgroundColor: Theme.black }}>
                 <SafeAreaView>
-                    <Header />
+                    <Header navigation={props.navigation}/>
                 </SafeAreaView>
             </View>
             <ScrollView style={styles.scrollView}>
