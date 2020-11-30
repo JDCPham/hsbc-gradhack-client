@@ -47,7 +47,6 @@ export function Login(props: any) {
                     <View style={styles.btnContainer}>
                         <Button icon="creation" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginRight: 5, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined">Register</Button>
                         <Button icon="login" style={[ButtonStyle.btn, { justifyContent: 'center', marginLeft: 5, flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="contained" loading={isLoggingIn} onPress={onLoginPress}>Login</Button>
-
                     </View>
                 </KeyboardAvoidingView>
             </View>

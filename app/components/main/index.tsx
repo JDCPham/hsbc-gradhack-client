@@ -10,11 +10,29 @@ import { NavigationContainer, ThemeProvider } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Dashboard from '../screens/dashboard';
 import Wallet from '../screens/wallet';
+import Activities from '../screens/activities';
+
+/* Screens */
+import ShowActivityCategories from '../screens/activities/view_activities/ShowActivityCategories';
+import ActivitySetupFormView from '../screens/activities/setup_activities/ActivitySetupFormView'
+
+import { createStackNavigator } from "@react-navigation/stack";
 
 /* Icons */
 import { faCoffee, faCogs, faHome, faSnowboarding, faUserAlt, faWallet } from '@fortawesome/free-solid-svg-icons'
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+const ActivityStackNavigator = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Activities" component={Activities} />
+            <Stack.Screen name="ShowActivityCategories" component={ShowActivityCategories} />
+            <Stack.Screen name="ActivitySetupFormView" component={ActivitySetupFormView} />
+        </Stack.Navigator>
+    );
+}
 
 function Main(props: any) {
 
@@ -33,12 +51,11 @@ function Main(props: any) {
         }
     }
 
-
     return (
         <Tab.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
             <Tab.Screen name="Dashboard" children={() => <Dashboard navigation={props.navigation}></Dashboard>} />
-            <Tab.Screen name="Activities" component={Dashboard} />
-            <Tab.Screen name="Wallet" children={() => <Wallet navigation={props.navigation}></Wallet>} />
+            <Tab.Screen name="Activities" component={ActivityStackNavigator} />
+            <Tab.Screen name="Wallet" component={Wallet} />
             <Tab.Screen name="Profile" component={Dashboard} />
             <Tab.Screen name="Settings" component={Dashboard} />
         </Tab.Navigator>
