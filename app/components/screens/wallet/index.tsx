@@ -3,9 +3,7 @@ import { SafeAreaView, Text, View, Image, ActivityIndicator } from 'react-native
 import { StatusBar, ScrollView, StyleSheet } from 'react-native';
 
 import Theme from '../../../../styles/theme.style';
-import ButtonStyle from '../../../../styles/button.style';
 import { Button } from 'react-native-paper';
-import { OutlinedButtonPaperTheme } from '../../../../styles/paper.style';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import currency from 'currency.js';
