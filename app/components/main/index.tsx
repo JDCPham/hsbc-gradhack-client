@@ -9,6 +9,7 @@ import Theme from '../../../styles/theme.style';
 import { NavigationContainer, ThemeProvider } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Dashboard from '../screens/dashboard';
+import Wallet from '../screens/wallet';
 
 /* Icons */
 import { faCoffee, faCogs, faHome, faSnowboarding, faUserAlt, faWallet } from '@fortawesome/free-solid-svg-icons'
@@ -36,7 +37,7 @@ function Main(props: any) {
         <Tab.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
             <Tab.Screen name="Dashboard" component={Dashboard}/>
             <Tab.Screen name="Activities" component={Dashboard} />
-            <Tab.Screen name="Wallet" component={Dashboard} />
+            <Tab.Screen name="Wallet" component={Wallet} />
             <Tab.Screen name="Profile" component={Dashboard} />
             <Tab.Screen name="Settings" component={Dashboard} />
         </Tab.Navigator>
