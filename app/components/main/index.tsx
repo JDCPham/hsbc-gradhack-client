@@ -36,6 +36,7 @@ const ActivityStackNavigator = () => {
 
 function Main(props: any) {
 
+
     const tabBarOptions: any = {
         activeBackgroundColor: Theme.primary,
         inactiveBackgroundColor: Theme.primary,
@@ -52,8 +53,8 @@ function Main(props: any) {
 
     return (
         <Tab.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
-            <Tab.Screen name="Dashboard" component={Dashboard}/>
             <Tab.Screen name="Activities" component={ActivityStackNavigator} />
+            <Tab.Screen name="Dashboard" children={() => <Dashboard navigation={props.navigation}></Dashboard>}/>
             <Tab.Screen name="Wallet" component={Wallet} />
             <Tab.Screen name="Profile" component={Dashboard} />
             <Tab.Screen name="Settings" component={Dashboard} />
