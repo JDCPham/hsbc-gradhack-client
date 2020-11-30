@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, Text, View, Image, ActivityIndicator } from 'react-native';
+import { SafeAreaView, Text, View, Image, ActivityIndicator, Modal, Button, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { StatusBar, ScrollView, StyleSheet } from 'react-native';
 
 import Theme from '../../../../styles/theme.style';
@@ -9,10 +9,13 @@ import Spacing from '../../../../styles/spacing.style';
 import Header from '../../common/header';
 import Card from '../../common/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import UpcomingPhysicalActivity from '../../modals/upcoming/physical';
 
 function Dashboard(props: any) {
 
     // React Hooks.
+    const [modalVisible, setModalVisible] = React.useState(false);
+    const [currentActivity, setCurrentActivity] = React.useState(null);
     const [name, setName] = React.useState("null");
     const [balance, setBalance] = React.useState("null");
     const [activities, setActivities] = React.useState([]);
@@ -32,9 +35,12 @@ function Dashboard(props: any) {
     else return (
 
         <View>
+            <View>
+                <Modal animationType="slide" transparent={true} visible={modalVisible} children={<UpcomingPhysicalActivity setModalVisible={setModalVisible} activity={currentActivity} />} />
+            </View>
             <View style={{ backgroundColor: Theme.black }}>
                 <SafeAreaView>
-                    <Header navigation={props.navigation}/>
+                    <Header navigation={props.navigation} />
                 </SafeAreaView>
             </View>
             <ScrollView style={styles.scrollView}>
@@ -52,18 +58,25 @@ function Dashboard(props: any) {
 
                     {activities.map((activity, i) => {
                         return (
-                            <Card
-                                key={i}
-                                image={activity['Image']}
-                                title={activity['Name']}
-                                location={activity['Location']}
-                                timestamp={activity['Timestamp']}
-                                venue={activity['Host']}
-                                price={activity['Cost']} />
+                            <TouchableOpacity key={i} onPress={() => {
+                                setCurrentActivity(activity['Identifier']);
+                                setModalVisible(true);
+                            }}>
+                                <Card
+                                    
+                                    image={activity['Image']}
+                                    title={activity['Name']}
+                                    location={activity['Location']}
+                                    timestamp={activity['Timestamp']}
+                                    venue={activity['Host']}
+                                    price={activity['Cost']} />
+                            </TouchableOpacity>
                         )
                     })}
 
                 </View>
+
+                <View style={{ marginVertical: 10 }}></View>
             </ScrollView>
         </View>
     );
@@ -181,6 +194,19 @@ const styles = StyleSheet.create({
         color: Theme.black,
         paddingVertical: 1,
         paddingHorizontal: 8
+    },
+    modal: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+        flex: 1,
+        backgroundColor: 'blue'
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
     },
 });
 

@@ -7,8 +7,14 @@ import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import Theme from '../../../../styles/theme.style';
 
 function Header(props: any) {
-    console.log(props)
-    return (
+
+    let hide: boolean = false;
+
+    try {
+        if (props.hideLogout) hide = true;
+    } catch (e) {}
+
+    if (!hide) return (
         <View style={styles.container}>
             <Text style={styles.flex}></Text>
             <Text style={styles.title}>MAJYK</Text>
@@ -21,7 +27,14 @@ function Header(props: any) {
                 </TouchableHighlight>
             </View>
         </View>
-    );
+    )
+    else return (
+        <View style={styles.container}>
+        <Text style={styles.flex}></Text>
+        <Text style={styles.title}>MAJYK</Text>
+        <View style={[styles.flex, { alignItems: 'flex-end' }]}></View>
+    </View>
+    )
 }
 
 
@@ -40,6 +53,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: '800',
         letterSpacing: 5,
+        textAlign: 'center',
         flex: 1
     },
     flex: {
