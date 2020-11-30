@@ -36,9 +36,9 @@ function Main(props: any) {
 
     return (
         <Tab.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
-            <Tab.Screen name="Dashboard" children={() => <Dashboard navigation={props.navigation}></Dashboard>}/>
+            <Tab.Screen name="Dashboard" children={() => <Dashboard navigation={props.navigation}></Dashboard>} />
             <Tab.Screen name="Activities" component={Dashboard} />
-            <Tab.Screen name="Wallet" component={Wallet} />
+            <Tab.Screen name="Wallet" children={() => <Wallet navigation={props.navigation}></Wallet>} />
             <Tab.Screen name="Profile" component={Dashboard} />
             <Tab.Screen name="Settings" component={Dashboard} />
         </Tab.Navigator>
@@ -46,23 +46,22 @@ function Main(props: any) {
     );
 }
 
-function screenOptions({route}: any) {
+function screenOptions({ route }: any) {
     return {
-        tabBarIcon: ({focused, color, size}: any) => {
+        tabBarIcon: ({ focused, color, size }: any) => {
 
-            if (route.name === "Dashboard") return <FontAwesomeIcon icon={ faHome } size={22}/>
-            if (route.name === "Activities") return <FontAwesomeIcon icon={ faSnowboarding } size={22} />
-            if (route.name === "Wallet") return <FontAwesomeIcon icon={ faWallet } size={22}/>
-            if (route.name === "Settings") return <FontAwesomeIcon icon={faCogs} size={22}/>
-            if (route.name === "Profile") return <FontAwesomeIcon icon={faUserAlt} size={22}/>
+            if (route.name === "Dashboard") return <FontAwesomeIcon icon={faHome} size={22} />
+            if (route.name === "Activities") return <FontAwesomeIcon icon={faSnowboarding} size={22} />
+            if (route.name === "Wallet") return <FontAwesomeIcon icon={faWallet} size={22} />
+            if (route.name === "Settings") return <FontAwesomeIcon icon={faCogs} size={22} />
+            if (route.name === "Profile") return <FontAwesomeIcon icon={faUserAlt} size={22} />
 
-            console.log(route.name)
-            return <FontAwesomeIcon icon={ faCoffee } />
+            return <FontAwesomeIcon icon={faCoffee} />
         }
     }
 }
 
-function tabBarIcon({focused, color, size}: any) {
+function tabBarIcon({ focused, color, size }: any) {
     return <Text>hi</Text>
 
 }

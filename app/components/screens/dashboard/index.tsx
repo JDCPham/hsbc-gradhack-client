@@ -10,6 +10,8 @@ import Header from '../../common/header';
 import Card from '../../common/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import UpcomingPhysicalActivity from '../../modals/upcoming/physical';
+import Wallet from '../wallet';
+import WalletCard from '../../common/wallet-card';
 
 function Dashboard(props: any) {
 
@@ -27,7 +29,7 @@ function Dashboard(props: any) {
             if (email != null) getData(email, setName, setBalance, setActivities, setIsLoading);
         })
     }, [])
-    if (isLoading) return (
+    if (isLoading === true) return (
         <View style={{ flex: 1, justifyContent: 'center', backgroundColor: Theme.primary }}>
             <ActivityIndicator size="large" color={Theme.black} />
         </View>
@@ -44,12 +46,14 @@ function Dashboard(props: any) {
                 </SafeAreaView>
             </View>
             <ScrollView style={styles.scrollView}>
+                
                 <View style={styles.card}>
                     <Text style={styles.greetingText}>Welcome back {name}! 👋</Text>
                     <Image source={require('../../../assets/animations/daytime.gif')} style={{ width: 90, height: 80, borderWidth: 0, borderColor: 'blue' }} />
                 </View>
-
-                {/* Upcoming Activities */}
+                <View style={[styles.card, Spacing.mt1, {width: '100%', paddingBottom: 0, paddingHorizontal: 0}]}>
+                    <WalletCard hideIcon={true} balance={balance}/>
+                </View>
                 <View style={[Spacing.mt3, Spacing.mb1]}>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={styles.title}>Upcoming Activities</Text>
@@ -90,6 +94,7 @@ function getData(email: any, setName: any, setBalance: any, setActivities: any, 
 
         fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/upcoming-activities/${email}`, { method: 'GET' }).then(response => response.json()).then(res => {
             setActivities(res);
+            console.log(res)
             setIsLoading(false);
         })
     })

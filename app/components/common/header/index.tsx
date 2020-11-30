@@ -2,7 +2,7 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
-import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Text, TouchableHighlight, TouchableOpacity } from 'react-native';
 
 import Theme from '../../../../styles/theme.style';
 
@@ -19,12 +19,12 @@ function Header(props: any) {
             <Text style={styles.flex}></Text>
             <Text style={styles.title}>MAJYK</Text>
             <View style={[styles.flex, { alignItems: 'flex-end' }]}>
-                <TouchableHighlight onPress={() => {
+                <TouchableOpacity onPress={() => {
                     AsyncStorage.removeItem('email').then(() => props.navigation.navigate("Login"));
                 }
                 }>
                     <FontAwesomeIcon icon={faSignOutAlt} size={22} />
-                </TouchableHighlight>
+                </TouchableOpacity>
             </View>
         </View>
     )

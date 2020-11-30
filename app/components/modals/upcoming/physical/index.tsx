@@ -5,7 +5,7 @@ import { View, StyleSheet, TouchableHighlight, Text, TouchableOpacity, Image, Sc
 import Theme from '../../../../../styles/theme.style';
 import Spacing from '../../../../../styles/spacing.style';
 import Header from '../../../common/header';
-import MapView, { Marker } from 'react-native-maps';
+// import MapView, { Marker } from 'react-native-maps';
 import moment from 'moment';
 import ButtonStyle from '../../../../../styles/button.style';
 import { Button } from 'react-native-paper';
@@ -78,13 +78,13 @@ function UpcomingPhysicalActivity(props: any) {
                             <Text style={[styles.heading]}>Location</Text>
                             <Text style={styles.headingAlt}>🗺</Text>
                         </View>
-                        <MapView provider="google" region={{
+                        {/* <MapView provider="google" region={{
                             latitude: latitude,
                             longitude: longitude,
                             latitudeDelta: 0.2,
                             longitudeDelta: 0.2,
                         }} showsUserLocation={true} style={styles.map} >
-                        </MapView>
+                        </MapView> */}
                     </View>
                     <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
                         <View style={{ flexDirection: 'row' }}>
@@ -113,8 +113,8 @@ function UpcomingPhysicalActivity(props: any) {
 }
 
 function getData(identifier: any, setIsLoading: any, setImage: any, setTitle: any, setLocation: any, setDescription: any, setTimestamp: any, setEventFee: any, setPenaltyFee: any): void {
+    if (identifier == null) return;
     fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/activity/${identifier}`, { method: 'GET' }).then(response => response.json()).then(res => {
-        console.log(res)
         setTitle(res['Name'])
         setLocation(res['Location'])
         setImage(res['Image'])
@@ -123,6 +123,7 @@ function getData(identifier: any, setIsLoading: any, setImage: any, setTitle: an
         setEventFee(res['Cost'])
         setPenaltyFee(res['Penalty'])
         setIsLoading(false)
+        console.log(res)
     })
 }
 

@@ -36,3 +36,14 @@ export const TextButtonPaperTheme = {
         primary: Theme.black
     }
 }
+
+export const InputPaperTheme2 = {
+    colors: {
+        background: Theme.white,
+        primary: Theme.black,
+        text: Theme.black,
+        placeholder: Theme.black,
+
+    },
+    roundness: 0
+}
