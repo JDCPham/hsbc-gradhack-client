@@ -3,6 +3,9 @@ import { SafeAreaView, Text, View, Image, ActivityIndicator } from 'react-native
 import { StatusBar, ScrollView, StyleSheet } from 'react-native';
 
 import Theme from '../../../../styles/theme.style';
+import ButtonStyle from '../../../../styles/button.style';
+import { Button } from 'react-native-paper';
+import { OutlinedButtonPaperTheme } from '../../../../styles/paper.style';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import currency from 'currency.js';
@@ -34,6 +37,10 @@ function Wallet(props: any) {
                 <View style={styles.WalletSect}>
                     <Text style={{fontSize: 20,}}>Wallet</Text>
                     <Text style={styles.mybalance}>{currency(balance).format()}</Text>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <Button style={[{ justifyContent: 'center', flex: 1, marginTop: 10, borderRadius: 0}]} color={Theme.black} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14}} mode="contained">Deposit</Button>
+                    <Button style={[{ justifyContent: 'center', flex: 1, marginTop: 10, borderRadius: 0}]} color={Theme.primary} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14}} mode="contained">Withdraw</Button>
                 </View>
             </View>
 
@@ -106,7 +113,7 @@ const styles = StyleSheet.create({
         marginBottom: 80
     },
     card: {
-        padding: 20,
+        paddingTop: 20,
         backgroundColor: Theme.white,
         borderRadius: 5,
         borderLeftColor: Theme.primary,
