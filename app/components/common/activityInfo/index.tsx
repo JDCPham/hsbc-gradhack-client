@@ -5,18 +5,18 @@ import Theme from '../../../../styles/theme.style';
 import moment from 'moment';
 import currency from 'currency.js';
 
-function Card(props: any) {
+function ActivityCard(props: any) {
     
     return (
         <View style={[styles.verticalCard, Spacing.mt1, { padding: 0 }]}>
-            <Image source={{uri: props.image}} style={{ width: '100%', height: 160 }} />
+            <Image source={{uri: props.image}} style={{ width: '100%', height: 350 }} />
             <View style={{ flexDirection: 'row', padding: 10 }}>
                 <View style={{ flexDirection: 'column' }}>
                     <Text style={[styles.activitiesText1]}>{props.title}</Text>
                     <Text style={[styles.activitiesText2]}>{props.location}</Text>
                     <View style={{ flexDirection: 'row', marginTop: 20 }}>
                         <Text style={[styles.activitiesText3, { marginRight: 5 }]}>{moment(props.timestamp).format("DD/MM | HH:mm")}</Text>
-                        <Text style={[styles.activitiesText4, { marginRight: 5 }]}>{props.venue}</Text>
+                        <Text style={[styles.activitiesText4, { marginRight: 5 }]}>{props.tags}</Text>
                         <Text style={[styles.activitiesText5, { marginRight: 5 }]}>{props.price == 0 ? "FREE" : currency(props.price).format()}</Text>
                     </View>
                 </View>
@@ -128,4 +128,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Card;
+export default ActivityCard;

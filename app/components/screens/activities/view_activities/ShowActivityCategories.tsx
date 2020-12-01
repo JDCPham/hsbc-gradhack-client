@@ -1,25 +1,32 @@
 import React from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import Theme from '../../../../../styles/theme.style';
 
 /* React Imports */
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, Image } from 'react-native';
 
-/* React Paper Imports */
-import { Provider as PaperProvider, Button } from 'react-native-paper';
-
-/* Theming */
-import Theme from '../../../../styles/theme.style';
-import ButtonStyle from '../../../../styles/button.style';
-import { ContainedButtonPaperTheme } from '../../../../styles/paper.style';
+import ActivityListCard from '../../../common/activity-list-view-card';
 
 
-
-
+const ListCategories = () => {
+    var categoryNameList = ["History Discussion", "Politics Discussion", "Cooking",
+        "Reading", "Running", "Spinning"];
+    var categoryList = [];
+    for (let i = 0; i < categoryNameList.length; i++) {
+        categoryList.push(
+            <View>
+                <ActivityListCard activityCategory={categoryNameList[i]} />
+            </View>
+        );
+    }
+    return categoryList;
+}
+const ListCategoriesComponent = ListCategories();
 
 export function ShowActivityCategories(props: any) {
+
     return (
         <View>
-            <Text>Test</Text>
+            {ListCategoriesComponent}
         </View>
     );
 }

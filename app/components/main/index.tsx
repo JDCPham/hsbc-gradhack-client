@@ -14,7 +14,8 @@ import Activities from '../screens/activities';
 
 /* Screens */
 import ShowActivityCategories from '../screens/activities/view_activities/ShowActivityCategories';
-import ActivitySetupFormView from '../screens/activities/setup_activities/ActivitySetupFormView'
+import ActivitySetupFormView from '../screens/activities/setup_activities/ActivitySetupFormView';
+import ShowActivityInfo from '../screens/activities/view_activities/ShowActivityInfo';
 
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -22,14 +23,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { faCoffee, faCogs, faHome, faSnowboarding, faUserAlt, faWallet } from '@fortawesome/free-solid-svg-icons'
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
 
+const Stack = createStackNavigator();
 const ActivityStackNavigator = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Activities" component={Activities} />
             <Stack.Screen name="ShowActivityCategories" component={ShowActivityCategories} />
             <Stack.Screen name="ActivitySetupFormView" component={ActivitySetupFormView} />
+            <Stack.Screen name="ShowActivityInfo" component={ShowActivityInfo} />
         </Stack.Navigator>
     );
 }
