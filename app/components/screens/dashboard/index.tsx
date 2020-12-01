@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, Text, View, Image, ActivityIndicator, Modal, Button, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Text, View, Image, ActivityIndicator, Modal, Button, TouchableHighlight, TouchableOpacity, RefreshControl } from 'react-native';
 import { StatusBar, ScrollView, StyleSheet } from 'react-native';
 
 import Theme from '../../../../styles/theme.style';
@@ -12,16 +12,29 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import UpcomingPhysicalActivity from '../../modals/upcoming/physical';
 import Wallet from '../wallet';
 import WalletCard from '../../common/wallet-card';
+import Deposit from '../../modals/deposit';
+import Withdraw from '../../modals/withdraw';
 
 function Dashboard(props: any) {
 
     // React Hooks.
     const [modalVisible, setModalVisible] = React.useState(false);
+    const [depositModalVisible, setDepositModalVisible] = React.useState(false);
+    const [withdrawModalVisible, setWithdrawModalVisible] = React.useState(false);
     const [currentActivity, setCurrentActivity] = React.useState(null);
     const [name, setName] = React.useState("null");
     const [balance, setBalance] = React.useState("null");
     const [activities, setActivities] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
+
+    const onRefresh = React.useCallback(() => {
+        setIsLoading(true);
+        AsyncStorage.getItem('email').then(email => {
+            if (email != null) getData(email, setName, setBalance, setActivities, setIsLoading);
+            else setIsLoading(false)
+        })
+    }, []);
+
 
     // API Call: User Details and Upcoming Activities.
     useEffect(() => {
@@ -39,6 +52,8 @@ function Dashboard(props: any) {
         <View>
             <View>
                 <Modal animationType="slide" transparent={true} visible={modalVisible} children={<UpcomingPhysicalActivity setModalVisible={setModalVisible} activity={currentActivity} />} />
+                <Modal animationType="slide" transparent={true} visible={depositModalVisible} children={<Deposit setModalVisible={setDepositModalVisible} />} />
+                <Modal animationType="slide" transparent={true} visible={withdrawModalVisible} children={<Withdraw setModalVisible={setWithdrawModalVisible} />} />
             </View>
             <View style={{ backgroundColor: Theme.black }}>
                 <SafeAreaView>
@@ -46,41 +61,45 @@ function Dashboard(props: any) {
                 </SafeAreaView>
             </View>
             <ScrollView style={styles.scrollView}>
-                
-                <View style={styles.card}>
-                    <Text style={styles.greetingText}>Welcome back {name}! 👋</Text>
-                    <Image source={require('../../../assets/animations/daytime.gif')} style={{ width: 90, height: 80, borderWidth: 0, borderColor: 'blue' }} />
-                </View>
-                <View style={[styles.card, Spacing.mt1, {width: '100%', paddingBottom: 0, paddingHorizontal: 0}]}>
-                    <WalletCard hideIcon={true} balance={balance}/>
-                </View>
-                <View style={[Spacing.mt3, Spacing.mb1]}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.title}>Upcoming Activities</Text>
-                        <Text style={styles.titleAlt}>🚀</Text>
+                <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
+                <View style={{ marginHorizontal: 20, marginTop: 10 }}>
+                    <View style={styles.card}>
+                        <Text style={styles.greetingText}>Welcome back {name}! 👋</Text>
+                        <Image source={require('../../../assets/animations/daytime.gif')} style={{ width: 90, height: 80, borderWidth: 0, borderColor: 'blue' }} />
+                    </View>
+                    <View style={[styles.card, Spacing.mt1, { width: '100%', paddingBottom: 0, paddingHorizontal: 0 }]}>
+                        <WalletCard hideIcon={true} balance={balance} setDepositModalVisible={setDepositModalVisible} setWithdrawModalVisible={setWithdrawModalVisible} />
+                    </View>
+                    <View style={[Spacing.mt3, Spacing.mb1]}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={styles.title}>Upcoming Activities</Text>
+                            <Text style={styles.titleAlt}>🚀</Text>
+                        </View>
+
+                        {activities.length <= 0 ? <View><Text style={styles.muted}>Currently no transactions</Text></View> : <View></View>}
+
+                        {activities.map((activity, i) => {
+                            return (
+                                <TouchableOpacity key={i} onPress={() => {
+                                    setCurrentActivity(activity['Identifier']);
+                                    setModalVisible(true);
+                                }}>
+                                    <Card
+
+                                        image={activity['Image']}
+                                        title={activity['Name']}
+                                        location={activity['Location']}
+                                        timestamp={activity['Timestamp']}
+                                        venue={activity['Host']}
+                                        price={activity['Cost']} />
+                                </TouchableOpacity>
+                            )
+                        })}
+
                     </View>
 
-                    {activities.map((activity, i) => {
-                        return (
-                            <TouchableOpacity key={i} onPress={() => {
-                                setCurrentActivity(activity['Identifier']);
-                                setModalVisible(true);
-                            }}>
-                                <Card
-                                    
-                                    image={activity['Image']}
-                                    title={activity['Name']}
-                                    location={activity['Location']}
-                                    timestamp={activity['Timestamp']}
-                                    venue={activity['Host']}
-                                    price={activity['Cost']} />
-                            </TouchableOpacity>
-                        )
-                    })}
-
+                    <View style={{ marginVertical: 10 }}></View>
                 </View>
-
-                <View style={{ marginVertical: 10 }}></View>
             </ScrollView>
         </View>
     );
@@ -102,9 +121,18 @@ function getData(email: any, setName: any, setBalance: any, setActivities: any, 
 
 
 const styles = StyleSheet.create({
+    muted: {
+        fontSize: 16,
+        marginTop: 30,
+        marginBottom: 50,
+        alignSelf: 'center',
+        textAlign: 'center',
+        fontWeight: '600',
+        color: '#888'
+    },
     scrollView: {
         backgroundColor: Theme.white,
-        paddingHorizontal: 20,
+        // paddingHorizontal: 20,
         paddingTop: 20,
         paddingBottom: 20,
         marginBottom: 80
