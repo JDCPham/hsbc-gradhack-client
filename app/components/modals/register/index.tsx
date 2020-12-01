@@ -43,8 +43,8 @@ function Register(props: any) {
                         <TextInput label="🔑 PASSWORD" style={[InputStyle.input, SpacingStyle.mt1]} secureTextEntry={true} mode="outlined" theme={InputPaperTheme} onChangeText={text => setPassword(text)} />
                     </View>
                     <View style={styles.btnContainer}>
-                        <Button icon="creation" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }}  mode="contained" onPress={() => props.setModalVisible(false)}>Sign up</Button>
-                        <Button icon="login" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginTop: 10, borderColor: '#111', borderWidth: 2 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }}  mode="outlined" onPress={() => props.setModalVisible(false)}>Cancel</Button>
+                        <Button icon="creation" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }}  mode="contained" onPress={onRegisterPress}>Sign up</Button>
+                        <Button icon="login" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginTop: 10, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }}  mode="outlined" onPress={() => props.setModalVisible(false)}>Cancel</Button>
                     </View>
                 </KeyboardAvoidingView>
             </View>
@@ -61,6 +61,7 @@ function Register(props: any) {
                 password: password
             })
         }).then(response => response.json()).then(res => {
+            console.log(res)
             if (res.registered) {
                 props.setModalVisible(false)
             } else {
