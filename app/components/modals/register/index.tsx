@@ -44,7 +44,7 @@ function Register(props: any) {
                     </View>
                     <View style={styles.btnContainer}>
                         <Button icon="creation" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }}  mode="contained" onPress={() => props.setModalVisible(false)}>Sign up</Button>
-                        <Button icon="login" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginTop: 10}]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }}  mode="outlined" onPress={() => props.setModalVisible(false)}>Cancel</Button>
+                        <Button icon="login" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginTop: 10, borderColor: '#111', borderWidth: 2 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }}  mode="outlined" onPress={() => props.setModalVisible(false)}>Cancel</Button>
                     </View>
                 </KeyboardAvoidingView>
             </View>
