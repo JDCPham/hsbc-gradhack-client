@@ -20,11 +20,13 @@ import { OutlinedButtonPaperTheme } from '../../../../styles/paper.style';
 function Register(props: any) {
 
     // Get Naviation Object.
-    const navigation = props.navigation;
+    // const navigation = props.navigation;
 
     // Hooks.
-    // const [isLoggingIn, setLoggingIn] = React.useState(false);
+    // const [isRegistered, setRegister] = React.useState(false);
     const [email, setEmail] = React.useState("");
+    const [first_name, setFirstName] = React.useState("");
+    const [last_name, setLastName] = React.useState("");
     const [password, setPassword] = React.useState("");
 
     return (
@@ -36,51 +38,39 @@ function Register(props: any) {
                     <Text style={{ marginTop: 5, marginBottom: 30, fontSize: 14, letterSpacing: 0.5, fontWeight: 'bold' }}>SOCIAL INVESTMENTS</Text>
                     <View style={styles.inputContainer}>
                         <TextInput label="💌 EMAIL" style={[InputStyle.input]} mode="outlined" theme={InputPaperTheme} keyboardType="email-address" onChangeText={text => setEmail(text)} />
+                        <TextInput label="📇 FIRST NAME" style={[InputStyle.input]} mode="outlined" theme={InputPaperTheme} onChangeText={text => setFirstName(text)} />
+                        <TextInput label="📇 LAST NAME" style={[InputStyle.input]} mode="outlined" theme={InputPaperTheme} onChangeText={text => setLastName(text)} />
                         <TextInput label="🔑 PASSWORD" style={[InputStyle.input, SpacingStyle.mt1]} secureTextEntry={true} mode="outlined" theme={InputPaperTheme} onChangeText={text => setPassword(text)} />
                     </View>
                     <View style={styles.btnContainer}>
                         <Button icon="creation" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }}  mode="contained" onPress={() => props.setModalVisible(false)}>Sign up</Button>
+                        <Button icon="login" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginTop: 10}]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }}  mode="outlined" onPress={() => props.setModalVisible(false)}>Cancel</Button>
                     </View>
                 </KeyboardAvoidingView>
             </View>
         </PaperProvider>
     );
 
-    // function onLoginPress() {
-
-    //     setLoggingIn(true);
-
-    //     fetch('https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/login', {
-    //         method: 'POST',
-    //         body: JSON.stringify({
-    //             email: email,
-    //             password: password
-    //         })
-    //     }).then(response => response.json()).then(res => {
-    //         if (res.loggedIn) {
-
-    //             // Set Local Storage and then navigate to main page.
-    //             AsyncStorage.setItem('email', email).then(() => {
-    //                 setLoggingIn(false);
-    //                 navigation.navigate("Main");
-    //             })
-
-    //         } else {
-    //             setLoggingIn(false);
-    //             alert("Invalid email or password.")
-    //         }
-    //     }).catch(error => {
-
-    //         setLoggingIn(false);
-    //         alert("An error occurred.")
-
-    //     })
-
-    // }
-
+    function onRegisterPress() {
+        fetch('https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/register', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: email,
+                first_name: first_name,
+                last_name: last_name,
+                password: password
+            })
+        }).then(response => response.json()).then(res => {
+            if (res.registered) {
+                props.setModalVisible(false)
+            } else {
+                alert("Email Existed")
+            }
+        }).catch(error => {
+            alert("An error occured.")
+        })
+    }
 }
-
-
 
 
 const styles = StyleSheet.create({
@@ -99,8 +89,9 @@ const styles = StyleSheet.create({
         width: '80%'
     },
     btnContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         width: '80%',
+        height: 150,
         paddingTop: 20,
         paddingBottom: 20
     },
