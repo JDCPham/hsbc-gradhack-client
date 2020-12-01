@@ -28,25 +28,29 @@ import Withdraw from '../../modals/withdraw';
 
 
 function Wallet(props: any) {
+
+    /* Hooks */
     const [isLoading, setIsLoading] = React.useState(true);
+    const [isQuietLoading, setIsQuietLoading] = React.useState(false);
     const [balance, setBalance] = React.useState("null");
     const [transactions, setTransactions] = React.useState([]);
     const [depositModalVisible, setDepositModalVisible] = React.useState(false);
     const [withdrawModalVisible, setWithdrawModalVisible] = React.useState(false);
 
 
+    /* Refresh Handler */
     const onRefresh = React.useCallback(() => {
-        setIsLoading(true);
+        setIsQuietLoading(true);
         AsyncStorage.getItem('email').then(email => {
-            if (email != null) getBalance(email, setBalance, setIsLoading, setTransactions);
-            else setIsLoading(false)
+            if (email != null) getBalance(email, setBalance, setIsLoading, setTransactions, setIsQuietLoading);
+            else setIsQuietLoading(false)
         })
     }, []);
 
     // API Call: User Details and Upcoming Activities.
     useEffect(() => {
         AsyncStorage.getItem('email').then(email => {
-            if (email != null) getBalance(email, setBalance, setIsLoading, setTransactions);
+            if (email != null) getBalance(email, setBalance, setIsLoading, setTransactions, setIsQuietLoading);
         })
     }, [])
 
@@ -58,8 +62,8 @@ function Wallet(props: any) {
     else return (
         <View>
             <View>
-                <Modal animationType="slide" transparent={true} visible={depositModalVisible} children={<Deposit setModalVisible={setDepositModalVisible} />} />
-                <Modal animationType="slide" transparent={true} visible={withdrawModalVisible} children={<Withdraw setModalVisible={setWithdrawModalVisible} />} />
+                <Modal animationType="slide" transparent={true} visible={depositModalVisible} children={<Deposit setModalVisible={setDepositModalVisible} onRefresh={onRefresh}/>} />
+                <Modal animationType="slide" transparent={true} visible={withdrawModalVisible} children={<Withdraw setModalVisible={setWithdrawModalVisible} onRefresh={onRefresh} />} />
             </View>
             <View style={{ backgroundColor: Theme.black }}>
                 <SafeAreaView>
@@ -67,9 +71,10 @@ function Wallet(props: any) {
                 </SafeAreaView>
             </View>
 
-            <ScrollView>
+            <ScrollView style={[isQuietLoading ? {opacity: 0.4} : {opacity: 1}]}>
                 <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
                 <View style={styles.container}>
+                {/* { isQuietLoading ? <ActivityIndicator size="large" color={Theme.black} /> : <View></View>} */}
                     <View style={[styles.card]}>
                         <WalletCard balance={balance} setDepositModalVisible={setDepositModalVisible} setWithdrawModalVisible={setWithdrawModalVisible} />
                     </View>
@@ -100,7 +105,7 @@ function Wallet(props: any) {
     )
 }
 
-function getBalance(email: any, setBalance: any, setIsLoading: any, setTransactions: any): void {
+function getBalance(email: any, setBalance: any, setIsLoading: any, setTransactions: any, setIsQuietLoading: any): void {
     console.log(email)
     fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/user-details/${email}`, { method: 'GET' }).then(response => response.json()).then(res => {
         console.log(res)
@@ -108,6 +113,7 @@ function getBalance(email: any, setBalance: any, setIsLoading: any, setTransacti
         fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/transactions/${email}`, { method: 'GET' }).then(response => response.json()).then(res => {
             setTransactions(res)
             setIsLoading(false)
+            setIsQuietLoading(false)
             console.log(res)
         })
     })

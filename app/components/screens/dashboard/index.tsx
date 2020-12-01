@@ -26,12 +26,13 @@ function Dashboard(props: any) {
     const [balance, setBalance] = React.useState("null");
     const [activities, setActivities] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
+    const [isQuietLoading, setIsQuietLoading] = React.useState(false);
 
     const onRefresh = React.useCallback(() => {
-        setIsLoading(true);
+        setIsQuietLoading(true);
         AsyncStorage.getItem('email').then(email => {
-            if (email != null) getData(email, setName, setBalance, setActivities, setIsLoading);
-            else setIsLoading(false)
+            if (email != null) getData(email, setName, setBalance, setActivities, setIsLoading, setIsQuietLoading);
+            else setIsQuietLoading(false)
         })
     }, []);
 
@@ -39,7 +40,7 @@ function Dashboard(props: any) {
     // API Call: User Details and Upcoming Activities.
     useEffect(() => {
         AsyncStorage.getItem('email').then(email => {
-            if (email != null) getData(email, setName, setBalance, setActivities, setIsLoading);
+            if (email != null) getData(email, setName, setBalance, setActivities, setIsLoading, setIsQuietLoading);
         })
     }, [])
     if (isLoading === true) return (
@@ -51,16 +52,16 @@ function Dashboard(props: any) {
 
         <View>
             <View>
-                <Modal animationType="slide" transparent={true} visible={modalVisible} children={<UpcomingPhysicalActivity setModalVisible={setModalVisible} activity={currentActivity} />} />
-                <Modal animationType="slide" transparent={true} visible={depositModalVisible} children={<Deposit setModalVisible={setDepositModalVisible} />} />
-                <Modal animationType="slide" transparent={true} visible={withdrawModalVisible} children={<Withdraw setModalVisible={setWithdrawModalVisible} />} />
+                <Modal animationType="slide" transparent={true} visible={modalVisible} children={<UpcomingPhysicalActivity setModalVisible={setModalVisible} activity={currentActivity} onRefresh={onRefresh} />} />
+                <Modal animationType="slide" transparent={true} visible={depositModalVisible} children={<Deposit setModalVisible={setDepositModalVisible} onRefresh={onRefresh} />} />
+                <Modal animationType="slide" transparent={true} visible={withdrawModalVisible} children={<Withdraw setModalVisible={setWithdrawModalVisible} onRefresh={onRefresh} />} />
             </View>
             <View style={{ backgroundColor: Theme.black }}>
                 <SafeAreaView>
                     <Header navigation={props.navigation} />
                 </SafeAreaView>
             </View>
-            <ScrollView style={styles.scrollView}>
+            <ScrollView style={[styles.scrollView, isQuietLoading ? {opacity: 0.4} : {opacity: 1}]}>
                 <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
                 <View style={{ marginHorizontal: 20, marginTop: 10 }}>
                     <View style={styles.card}>
@@ -106,7 +107,7 @@ function Dashboard(props: any) {
 }
 
 
-function getData(email: any, setName: any, setBalance: any, setActivities: any, setIsLoading: any): void {
+function getData(email: any, setName: any, setBalance: any, setActivities: any, setIsLoading: any, setIsQuietLoading: any): void {
     fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/user-details/${email}`, { method: 'GET' }).then(response => response.json()).then(res => {
         setName(res['firstName'])
         setBalance(res['balance'])
@@ -114,6 +115,7 @@ function getData(email: any, setName: any, setBalance: any, setActivities: any, 
         fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/upcoming-activities/${email}`, { method: 'GET' }).then(response => response.json()).then(res => {
             setActivities(res);
             console.log(res)
+            setIsQuietLoading(false);
             setIsLoading(false);
         })
     })
