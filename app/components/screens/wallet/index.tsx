@@ -111,7 +111,7 @@ function getBalance(email: any, setBalance: any, setIsLoading: any, setTransacti
         console.log(res)
         setBalance(res['balance'])
         fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/transactions/${email}`, { method: 'GET' }).then(response => response.json()).then(res => {
-            setTransactions(res)
+            setTransactions(res.reverse())
             setIsLoading(false)
             setIsQuietLoading(false)
             console.log(res)

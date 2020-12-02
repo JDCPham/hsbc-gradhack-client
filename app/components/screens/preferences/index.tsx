@@ -92,7 +92,7 @@ function Preferences(props: any) {
                         </TouchableOpacity>
                     </View>
                     <View style={[styles.preferenceContainer]}>
-                        <TouchableOpacity style={[styles.preferenceCard, SpacingStyle.mr1, preferences["comedy"] ? styles.borderTopOn : styles.borderTopOff]} onPress={() => preferenceSet(preferences, setPreferences, "sports")}>
+                        <TouchableOpacity style={[styles.preferenceCard, SpacingStyle.mr1, preferences["comedy"] ? styles.borderTopOn : styles.borderTopOff]} onPress={() => preferenceSet(preferences, setPreferences, "comedy")}>
                             <Text style={[styles.preferenceCardText]}>Comedy</Text>
                             {preferences['comedy'] ? <View style={{alignItems: 'flex-end'}}><FontAwesomeIcon icon={faCheckCircle} size={22} color={Theme.primary}></FontAwesomeIcon></View> : <View style={{alignItems: 'flex-end'}}><FontAwesomeIcon icon={faCircle} size={22} color={Theme.gray}></FontAwesomeIcon></View> }
                         </TouchableOpacity>
