@@ -2,15 +2,27 @@ import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /* React Imports */
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, Image } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, Image, Modal, RefreshControl, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 
 /* React Paper Imports */
-import { Provider as PaperProvider, Button } from 'react-native-paper';
+import { Provider as PaperProvider, Button, Card } from 'react-native-paper';
 
 /* Theming */
 import Theme from '../../../../styles/theme.style';
 import ButtonStyle from '../../../../styles/button.style';
 import { ContainedButtonPaperTheme } from '../../../../styles/paper.style';
+
+
+/* Screens */
+import ShowActivityCategories from './view_activities/ShowActivityCategories';
+import ActivitySetupFormView from './setup_activities/ActivitySetupFormView';
+import ShowActivityInfo from './view_activities/ShowActivityInfo';
+
+import { createStackNavigator, Header } from "@react-navigation/stack";
+import WalletCard from '../../common/wallet-card';
+import Deposit from '../../modals/deposit';
+import UpcomingPhysicalActivity from '../../modals/upcoming/physical';
+import Withdraw from '../../modals/withdraw';
 
 
 export function Activities(props: any) {
@@ -20,6 +32,7 @@ export function Activities(props: any) {
 
     return (
         <PaperProvider>
+
             <View style={styles.container}>
                 <KeyboardAvoidingView style={styles.innerContainer}
                     behavior={Platform.OS == "ios" ? "padding" : "height"}>
@@ -58,7 +71,7 @@ export function Activities(props: any) {
                             }}
                             mode="contained"
                             onPress={() => navigation.navigate('ActivitySetupFormView')}>
-                                Setup An Activity
+                            Setup An Activity
                         </Button>
                         <Button icon="creation"
                             style={[ButtonStyle.btn,
@@ -76,7 +89,7 @@ export function Activities(props: any) {
                             }}
                             mode="contained"
                             onPress={() => navigation.navigate('ShowActivityInfo')}>
-                                Test One Activity Info
+                            Test One Activity Info
                         </Button>
                     </View>
                 </KeyboardAvoidingView>

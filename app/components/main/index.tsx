@@ -21,13 +21,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 /* Icons */
 import { faCoffee, faCogs, faHome, faSnowboarding, faUserAlt, faWallet } from '@fortawesome/free-solid-svg-icons'
+import Preferences from '../screens/preferences';
+import Profile from '../screens/profile';
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
-const ActivityStackNavigator = () => {
+const ActivityStackNavigator = (props: any) => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator headerMode="none" initialRouteName="Activities">
             <Stack.Screen name="Activities" component={Activities} />
             <Stack.Screen name="ShowActivityCategories" component={ShowActivityCategories} />
             <Stack.Screen name="ActivitySetupFormView" component={ActivitySetupFormView} />
@@ -56,10 +58,10 @@ function Main(props: any) {
     return (
         <Tab.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
             <Tab.Screen name="Dashboard" children={() => <Dashboard navigation={props.navigation}></Dashboard>} />
-            <Tab.Screen name="Activities" component={ActivityStackNavigator} />
-            <Tab.Screen name="Wallet" component={Wallet} />
-            <Tab.Screen name="Profile" component={Dashboard} />
-            <Tab.Screen name="Settings" component={Dashboard} />
+            <Tab.Screen name="Activities" children={() => <ActivityStackNavigator navigation={props.navigation}></ActivityStackNavigator>} />
+            <Tab.Screen name="Wallet" children={() => <Wallet navigation={props.navigation}></Wallet>} />
+            <Tab.Screen name="Profile" children={() => <Profile navigation={props.navigation}></Profile>} />
+            <Tab.Screen name="Preferences" children={() => <Preferences navigation={props.navigation}></Preferences>} />
         </Tab.Navigator>
 
     );
@@ -72,7 +74,7 @@ function screenOptions({ route }: any) {
             if (route.name === "Dashboard") return <FontAwesomeIcon icon={faHome} size={22} />
             if (route.name === "Activities") return <FontAwesomeIcon icon={faSnowboarding} size={22} />
             if (route.name === "Wallet") return <FontAwesomeIcon icon={faWallet} size={22} />
-            if (route.name === "Settings") return <FontAwesomeIcon icon={faCogs} size={22} />
+            if (route.name === "Preferences") return <FontAwesomeIcon icon={faCogs} size={22} />
             if (route.name === "Profile") return <FontAwesomeIcon icon={faUserAlt} size={22} />
 
             return <FontAwesomeIcon icon={faCoffee} />

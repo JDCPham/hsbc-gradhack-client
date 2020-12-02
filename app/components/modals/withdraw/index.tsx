@@ -70,6 +70,7 @@ function withdraw(setIsLoading: any, amount: any, props: any): void {
         if (email != null) {
             fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/withdraw/${email}/${amount}`, { method: 'GET' }).then(response => response.json()).then(res => {
                 setIsLoading(false)
+                props.onRefresh();
                 props.setModalVisible(false);
             })
         } else {
