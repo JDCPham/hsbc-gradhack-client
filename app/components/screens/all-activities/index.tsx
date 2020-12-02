@@ -12,14 +12,16 @@ import Header from '../../common/header';
 /* Theming */
 import Theme from '../../../../styles/theme.style';
 import InputStyle from '../../../../styles/input.style';
-import SpacingStyle from '../../../../styles/spacing.style';
+import Spacing from '../../../../styles/spacing.style';
 import ButtonStyle from '../../../../styles/button.style';
 import { InputPaperTheme2 } from '../../../../styles/paper.style';
 import { ContainedButtonPaperTheme } from '../../../../styles/paper.style';
 import { OutlinedButtonPaperTheme } from '../../../../styles/paper.style';
 import { Button, RadioButton, TextInput } from 'react-native-paper';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import Card from '../../common/card';
 import { faCheck, faCheckCircle, faCircle } from '@fortawesome/free-solid-svg-icons';
+import ActivitySignUp from '../../modals/activity-sign-up';
 
 
 function AllActivities(props: any) {
@@ -28,14 +30,30 @@ function AllActivities(props: any) {
     const [activities, setActivities] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const [isQuietLoading, setIsQuietLoading] = React.useState(false);
+    const [currentActivity, setCurrentActivity] = React.useState(null);
+    const [modalVisible, setModalVisible] = React.useState(false);
 
     // API Call: User Details and Upcoming Activities.
     useEffect(() => {
         getData(setActivities, setIsLoading, setIsQuietLoading);
     }, [])
 
-    return (
+    const onRefresh = React.useCallback(() => {
+        setIsQuietLoading(true);
+        getData(setActivities, setIsLoading, setIsQuietLoading);
+    }, []);
+
+    if (isLoading === true) return (
+        <View style={{ flex: 1, justifyContent: 'center', backgroundColor: Theme.primary }}>
+            <ActivityIndicator size="large" color={Theme.black} />
+        </View>
+    )
+
+    else return (
         <View>
+             <View>
+                <Modal animationType="slide" transparent={true} visible={modalVisible} children={<ActivitySignUp setModalVisible={setModalVisible} activity={currentActivity} onRefresh={onRefresh} />} />
+            </View>
             <View style={{ backgroundColor: Theme.black }}>
                 <SafeAreaView>
                     <Header navigation={props.navigation} />
@@ -47,11 +65,31 @@ function AllActivities(props: any) {
                     <View style={[styles.card]}>
                         <Image source={require('../../../assets/animations/settings.gif')} style={styles.image} />
                     </View>
-                    <View style={[{ marginTop: 20 }]}>
+                    <View style={[Spacing.mt3, Spacing.mb1]}>
                         <View style={{ flexDirection: 'row' }}>
                             <Text style={styles.title}>All Activities</Text>
                             <Text style={styles.titleAlt}>🚀</Text>
                         </View>
+
+
+                        {activities.map((activity, i) => {
+                            return (
+                                <TouchableOpacity key={i} onPress={() => {
+                                    setCurrentActivity(activity['Identifier']);
+                                    setModalVisible(true);
+                                }}>
+                                    <Card
+                                        image={activity['Image']}
+                                        title={activity['Name']}
+                                        location={activity['Location']}
+                                        timestamp={activity['Timestamp']}
+                                        venue={activity['Host']}
+                                        price={activity['Cost']} />
+                                </TouchableOpacity>
+
+                            )
+                        })}
+
                     </View>
                     <View style={{ marginVertical: 50 }}></View>
                 </View>
@@ -61,7 +99,7 @@ function AllActivities(props: any) {
 }
 
 function getData(setActivities: any, setIsLoading: any, setIsQuietLoading: any): void {
-    fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/activities`, { method: 'GET' }).then(response => response.json()).then(res => {
+    fetch(`https://z3kx6gvst6.execute-api.us-east-2.amazonaws.com/dev/all-activities`, { method: 'GET' }).then(response => response.json()).then(res => {
         console.log("success")
         console.log(res)
         setActivities(res)
@@ -72,7 +110,15 @@ function getData(setActivities: any, setIsLoading: any, setIsQuietLoading: any):
 
 
 const styles = StyleSheet.create({
-
+    muted: {
+        fontSize: 16,
+        marginTop: 30,
+        marginBottom: 50,
+        alignSelf: 'center',
+        textAlign: 'center',
+        fontWeight: '600',
+        color: '#888'
+    },
     container: {
         paddingHorizontal: 20,
         paddingTop: 20
