@@ -12,13 +12,6 @@ import Theme from '../../../../styles/theme.style';
 import ButtonStyle from '../../../../styles/button.style';
 import { ContainedButtonPaperTheme } from '../../../../styles/paper.style';
 
-/* Screens */
-import ShowActivityCategories from './view_activities/ShowActivityCategories';
-import ActivitySetupFormView from './setup_activities/ActivitySetupFormView';
-import ShowActivityInfo from './view_activities/ShowActivityInfo';
-
-import { createStackNavigator } from "@react-navigation/stack";
-
 
 export function Activities(props: any) {
 
@@ -91,8 +84,6 @@ export function Activities(props: any) {
         </PaperProvider>
     );
 }
-
-
 
 
 const styles = StyleSheet.create({

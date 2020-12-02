@@ -1,5 +1,8 @@
 import React from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
 import Theme from '../../../../../styles/theme.style';
+
 
 /* React Imports */
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, Image } from 'react-native';
@@ -74,28 +77,40 @@ export function ShowActivityInfo(props: any) {
 
     function fillActivityCard() {
         return <View>
-                <ActivityCard image={image}
-                    title={name}
-                    location={location}
-                    tags={tags}
-                    timestamp={time}
-                    price={cost} />
-                <Text style={[styles.descriptionTxtStyle]}>
-                    {description}
-                </Text>
-                <Text style={[styles.extraInfoStyle]}>
-                    Absence Penalty: ${penalty}
-                </Text>
-                <Text style={[styles.extraInfoStyle]}>
-                    Is A Virtual Event: {virtual? "Yes": "No"}
-                </Text>
-                <Text style={[styles.extraInfoStyle]}>
-                    Host: {host}
-                </Text>
-                <Text style={[styles.extraInfoStyle]}>
-                    Zoom: {zoom? zoom: "N/A"}
-                </Text>
-            </View>;
+            <ActivityCard image={image}
+                title={name}
+                location={location}
+                tags={tags}
+                timestamp={time}
+                price={cost}
+                rating={4.5} />
+            <Text style={[styles.descriptionTxtStyle]}>
+                {description}
+            </Text>
+            <Text style={[styles.extraInfoStyle]}>
+                Absence Penalty: ${penalty}
+            </Text>
+            <Text style={[styles.extraInfoStyle]}>
+                Is A Virtual Event: {virtual ? "Yes" : "No"}
+            </Text>
+            <Text style={[styles.extraInfoStyle]}>
+                Host: {host}
+            </Text>
+            <Text style={[styles.extraInfoStyle]}>
+                Zoom: {zoom ? zoom : "N/A"}
+            </Text>
+            <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+                <TileLayer
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={[51.505, -0.09]}>
+                    <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                </Marker>
+            </MapContainer>
+        </View>;
     }
     const ThisActivityCard = fillActivityCard();
 
