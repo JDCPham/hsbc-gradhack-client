@@ -1,11 +1,9 @@
 import React from 'react';
-// import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-
 import Theme from '../../../../../styles/theme.style';
 
 
 /* React Imports */
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, Image } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 
 import ActivityCard from '../../../common/activityInfo';
 
@@ -28,6 +26,11 @@ const styles = StyleSheet.create({
         color: Theme.black,
         paddingVertical: 5,
         paddingHorizontal: 8
+    },
+    map: {
+        flex: 1,
+        width: '90%',
+        height: '40%'
     }
 });
 
@@ -76,7 +79,7 @@ export function ShowActivityInfo(props: any) {
         });
 
     function fillActivityCard() {
-        return <View>
+        return <ScrollView>
             <ActivityCard image={image}
                 title={name}
                 location={location}
@@ -99,18 +102,7 @@ export function ShowActivityInfo(props: any) {
             <Text style={[styles.extraInfoStyle]}>
                 Zoom: {zoom ? zoom : "N/A"}
             </Text>
-            {/* <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-                <TileLayer
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
-            </MapContainer> */}
-        </View>;
+        </ScrollView>;
     }
     const ThisActivityCard = fillActivityCard();
 
