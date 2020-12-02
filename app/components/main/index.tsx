@@ -16,6 +16,7 @@ import Activities from '../screens/activities';
 import ShowActivityCategories from '../screens/activities/view_activities/ShowActivityCategories';
 import ActivitySetupFormView from '../screens/activities/setup_activities/ActivitySetupFormView';
 import ShowActivityInfo from '../screens/activities/view_activities/ShowActivityInfo';
+import ActivityAnalyzerView from '../screens/activities/setup_activities/ActivityAnalyzerView';
 
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -35,6 +36,7 @@ const ActivityStackNavigator = (props: any) => {
             <Stack.Screen name="ShowActivityCategories" component={ShowActivityCategories} />
             <Stack.Screen name="ActivitySetupFormView" component={ActivitySetupFormView} />
             <Stack.Screen name="ShowActivityInfo" component={ShowActivityInfo} />
+            <Stack.Screen name="ActivityAnalyzerView" component={ActivityAnalyzerView} />
         </Stack.Navigator>
     );
 }

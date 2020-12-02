@@ -1,8 +1,9 @@
 import React from 'react';
 import Theme from '../../../../../styles/theme.style';
 
+
 /* React Imports */
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, Image } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 
 import ActivityCard from '../../../common/activityInfo';
 
@@ -25,6 +26,11 @@ const styles = StyleSheet.create({
         color: Theme.black,
         paddingVertical: 5,
         paddingHorizontal: 8
+    },
+    map: {
+        flex: 1,
+        width: '90%',
+        height: '40%'
     }
 });
 
@@ -73,29 +79,30 @@ export function ShowActivityInfo(props: any) {
         });
 
     function fillActivityCard() {
-        return <View>
-                <ActivityCard image={image}
-                    title={name}
-                    location={location}
-                    tags={tags}
-                    timestamp={time}
-                    price={cost} />
-                <Text style={[styles.descriptionTxtStyle]}>
-                    {description}
-                </Text>
-                <Text style={[styles.extraInfoStyle]}>
-                    Absence Penalty: ${penalty}
-                </Text>
-                <Text style={[styles.extraInfoStyle]}>
-                    Is A Virtual Event: {virtual? "Yes": "No"}
-                </Text>
-                <Text style={[styles.extraInfoStyle]}>
-                    Host: {host}
-                </Text>
-                <Text style={[styles.extraInfoStyle]}>
-                    Zoom: {zoom? zoom: "N/A"}
-                </Text>
-            </View>;
+        return <ScrollView>
+            <ActivityCard image={image}
+                title={name}
+                location={location}
+                tags={tags}
+                timestamp={time}
+                price={cost}
+                rating={4.5} />
+            <Text style={[styles.descriptionTxtStyle]}>
+                {description}
+            </Text>
+            <Text style={[styles.extraInfoStyle]}>
+                Absence Penalty: ${penalty}
+            </Text>
+            <Text style={[styles.extraInfoStyle]}>
+                Is A Virtual Event: {virtual ? "Yes" : "No"}
+            </Text>
+            <Text style={[styles.extraInfoStyle]}>
+                Host: {host}
+            </Text>
+            <Text style={[styles.extraInfoStyle]}>
+                Zoom: {zoom ? zoom : "N/A"}
+            </Text>
+        </ScrollView>;
     }
     const ThisActivityCard = fillActivityCard();
 

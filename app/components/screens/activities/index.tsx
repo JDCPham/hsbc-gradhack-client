@@ -12,6 +12,7 @@ import Theme from '../../../../styles/theme.style';
 import ButtonStyle from '../../../../styles/button.style';
 import { ContainedButtonPaperTheme } from '../../../../styles/paper.style';
 
+
 /* Screens */
 import ShowActivityCategories from './view_activities/ShowActivityCategories';
 import ActivitySetupFormView from './setup_activities/ActivitySetupFormView';
@@ -72,7 +73,9 @@ export function Activities(props: any) {
                             onPress={() => navigation.navigate('ActivitySetupFormView')}>
                             Setup An Activity
                         </Button>
-                        <Button icon="creation"
+                    </View>
+                    <View style={styles.btnContainer}>
+                    <Button icon="creation"
                             style={[ButtonStyle.btn,
                             {
                                 justifyContent: 'center',
@@ -90,14 +93,30 @@ export function Activities(props: any) {
                             onPress={() => navigation.navigate('ShowActivityInfo')}>
                             Test One Activity Info
                         </Button>
+                        <Button icon="creation"
+                            style={[ButtonStyle.btn,
+                            {
+                                justifyContent: 'center',
+                                marginLeft: 5,
+                                flex: 1
+                            }]}
+                            theme={ContainedButtonPaperTheme}
+                            labelStyle={{
+                                color: Theme.primary,
+                                fontWeight: '700',
+                                fontSize: 14,
+                                letterSpacing: 2
+                            }}
+                            mode="contained"
+                            onPress={() => navigation.navigate('ActivityAnalyzerView')}>
+                            Test Data Viz Page
+                        </Button>
                     </View>
                 </KeyboardAvoidingView>
             </View>
         </PaperProvider>
     );
 }
-
-
 
 
 const styles = StyleSheet.create({
