@@ -11,6 +11,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Dashboard from '../screens/dashboard';
 import Wallet from '../screens/wallet';
 import Activities from '../screens/activities';
+import CreateActivity from '../screens/create';
+
 
 /* Screens */
 import ShowActivityCategories from '../screens/activities/view_activities/ShowActivityCategories';
@@ -28,18 +30,18 @@ import AllActivities from '../screens/all-activities';
 
 const Tab = createBottomTabNavigator();
 
-const Stack = createStackNavigator();
-const ActivityStackNavigator = (props: any) => {
-    return (
-        <Stack.Navigator headerMode="none" initialRouteName="Activities">
-            <Stack.Screen name="Activities" component={Activities} />
-            <Stack.Screen name="ShowActivityCategories" component={ShowActivityCategories} />
-            <Stack.Screen name="ActivitySetupFormView" component={ActivitySetupFormView} />
-            <Stack.Screen name="ShowActivityInfo" component={ShowActivityInfo} />
-            <Stack.Screen name="ActivityAnalyzerView" component={ActivityAnalyzerView} />
-        </Stack.Navigator>
-    );
-}
+// const Stack = createStackNavigator();
+// const ActivityStackNavigator = (props: any) => {
+//     return (
+//         <Stack.Navigator headerMode="none" initialRouteName="Activities">
+//             <Stack.Screen name="Activities" component={Activities} />
+//             <Stack.Screen name="ShowActivityCategories" component={ShowActivityCategories} />
+//             <Stack.Screen name="ActivitySetupFormView" component={ActivitySetupFormView} />
+//             <Stack.Screen name="ShowActivityInfo" component={ShowActivityInfo} />
+//             <Stack.Screen name="ActivityAnalyzerView" component={ActivityAnalyzerView} />
+//         </Stack.Navigator>
+//     );
+// }
 
 function Main(props: any) {
 
@@ -62,7 +64,8 @@ function Main(props: any) {
         <Tab.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
             <Tab.Screen name="Dashboard" children={() => <Dashboard navigation={props.navigation}></Dashboard>} />
             <Tab.Screen name="Activities" children={() => <AllActivities navigation={props.navigation}></AllActivities>} />
-            <Tab.Screen name="Create" children={() => <ActivityStackNavigator navigation={props.navigation}></ActivityStackNavigator>} />
+            {/* <Tab.Screen name="Create" children={() => <ActivityStackNavigator navigation={props.navigation}></ActivityStackNavigator>} /> */}
+            <Tab.Screen name="Create" children={() => <CreateActivity navigation={props.navigation}></CreateActivity>} />
             <Tab.Screen name="Wallet" children={() => <Wallet navigation={props.navigation}></Wallet>} />
             <Tab.Screen name="Profile" children={() => <Profile navigation={props.navigation}></Profile>} />
             <Tab.Screen name="Preferences" children={() => <Preferences navigation={props.navigation}></Preferences>} />
