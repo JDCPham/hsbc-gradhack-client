@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { SafeAreaView, Text, View, StyleSheet, ScrollView, Linking } from 'react-native';
+import WebView from 'react-native-webview';
 
 /* Components */
 import Header from '../../../common/header';
@@ -7,11 +8,24 @@ import Header from '../../../common/header';
 /* Theming */
 import Theme from '../../../../../styles/theme.style';
 import { Button } from 'react-native-paper';
-import {OutlinedButtonPaperTheme} from '../../../../../styles/paper.style';
+import { OutlinedButtonPaperTheme } from '../../../../../styles/paper.style';
+
 
 function ActivityHistory(props: any) {
     // Get Naviation Object.
     const navigation = props.navigation;
+
+    function showText(){
+        return <View style={[styles.card]}>
+            <Text style={[styles.sugText]}>
+                Suggestions from RESEARCH
+            </Text>
+        </View>
+    }
+    const showTextCompo = showText();
+
+    // You can use a state to control wether the component is showing or not
+    const [show, setShow] = React.useState(false); // By default won't show
 
     return (
         <View>
@@ -21,24 +35,23 @@ function ActivityHistory(props: any) {
                 </SafeAreaView>
             </View>
             <ScrollView style={[styles.Container]}>
-                <View style={{flexDirection: 'row'}}>
-                    <Text style={styles.title}>Gig Economy Tutorial</Text>
-                    <Text style={[styles.title, {backgroundColor: Theme.primary}]}>🎓</Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.title}>Let Us Help you</Text>
+                    <Text style={[styles.title, { backgroundColor: Theme.primary }]}>🎓</Text>
                 </View>
-                <Text style={[styles.secTitle]}>See Detail</Text>
-                <View style={[styles.card]}>
-                    <Text style={[styles.sugText]}>
-                        Suggestions from RESEARCH
-                    </Text>
-                </View>
+                <Text style={[styles.secTitle]}
+                    onPress={() => {show == true ? setShow(false) : setShow(true)}}
+                    >See Detail
+                </Text>
+                {show? showTextCompo: null}
                 <Text style={[styles.secTitle]}>Other Sources</Text>
-                    <Button style={[styles.mybtn, {marginBottom: 20, backgroundColor: Theme.black}]} labelStyle={{color: Theme.primary, fontSize: 16,}} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
-                    <Button style={[styles.mybtn, {marginBottom: 20, backgroundColor: Theme.black}]} labelStyle={{color: Theme.primary, fontSize: 16,}} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
-                    <Button style={[styles.mybtn, {marginBottom: 20, backgroundColor: Theme.black}]} labelStyle={{color: Theme.primary, fontSize: 16,}} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
-                    <Button style={[styles.mybtn, {backgroundColor: Theme.black}]} labelStyle={{color: Theme.primary, fontSize: 16,}} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
+                <Button style={[styles.mybtn, { marginBottom: 20, backgroundColor: Theme.black }]} labelStyle={{ color: Theme.primary, fontSize: 16, }} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
+                <Button style={[styles.mybtn, { marginBottom: 20, backgroundColor: Theme.black }]} labelStyle={{ color: Theme.primary, fontSize: 16, }} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
+                <Button style={[styles.mybtn, { marginBottom: 20, backgroundColor: Theme.black }]} labelStyle={{ color: Theme.primary, fontSize: 16, }} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
+                <Button style={[styles.mybtn, { backgroundColor: Theme.black }]} labelStyle={{ color: Theme.primary, fontSize: 16, }} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
                 <View style={[styles.btnContainer]}>
-                    <Button style={[styles.mybtn, {backgroundColor: Theme.primary}]} labelStyle={{color: Theme.black, fontWeight: '700', fontSize: 16, letterSpacing: 2 }} mode="contained" onPress={() => navigation.navigate('final')}>Next</Button>
-                    <Button style={[styles.mybtn, {marginTop: 20, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{fontWeight: '700', fontSize: 16, letterSpacing: 2 }} mode="outlined" onPress={() => navigation.navigate('dashboard')}>Cancel</Button>
+                    <Button style={[styles.mybtn, { backgroundColor: Theme.primary }]} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 16, letterSpacing: 2 }} mode="contained" onPress={() => navigation.navigate('final')}>Next</Button>
+                    <Button style={[styles.mybtn, { marginTop: 20, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ fontWeight: '700', fontSize: 16, letterSpacing: 2 }} mode="outlined" onPress={() => navigation.navigate('dashboard')}>Cancel</Button>
                 </View>
             </ScrollView>
         </View>
@@ -63,7 +76,7 @@ const styles = StyleSheet.create({
         // textTransform: 'uppercase'
     },
     secTitle: {
-        backgroundColor: Theme.primary, 
+        backgroundColor: Theme.primary,
         fontSize: 18,
         width: '50%',
         padding: 10,
