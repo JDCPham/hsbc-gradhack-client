@@ -11,14 +11,14 @@ import { Provider as PaperProvider, Button, Card } from 'react-native-paper';
 import Theme from '../../../../styles/theme.style';
 import ButtonStyle from '../../../../styles/button.style';
 import { ContainedButtonPaperTheme } from '../../../../styles/paper.style';
-
+import Header from '../../common/header';
 
 /* Screens */
 import ShowActivityCategories from './view_activities/ShowActivityCategories';
 import ActivitySetupFormView from './setup_activities/ActivitySetupFormView';
 import ShowActivityInfo from './view_activities/ShowActivityInfo';
 
-import { createStackNavigator, Header } from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import WalletCard from '../../common/wallet-card';
 import Deposit from '../../modals/deposit';
 import UpcomingPhysicalActivity from '../../modals/upcoming/physical';
@@ -32,7 +32,7 @@ export function Activities(props: any) {
 
     return (
         <PaperProvider>
-
+            <Header></Header>
             <View style={styles.container}>
                 <KeyboardAvoidingView style={styles.innerContainer}
                     behavior={Platform.OS == "ios" ? "padding" : "height"}>
