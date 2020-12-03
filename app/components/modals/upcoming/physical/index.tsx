@@ -5,7 +5,7 @@ import { View, StyleSheet, TouchableHighlight, Text, TouchableOpacity, Image, Sc
 import Theme from '../../../../../styles/theme.style';
 import Spacing from '../../../../../styles/spacing.style';
 import Header from '../../../common/header';
-// import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import moment from 'moment';
 import ButtonStyle from '../../../../../styles/button.style';
 import { Button, TextInput } from 'react-native-paper';
@@ -98,13 +98,13 @@ function UpcomingPhysicalActivity(props: any) {
 
                     <View style={[styles.card, { marginTop: 10 }]}>
                         <Text style={{ fontSize: 48, marginTop: -10, padding: 0 }}>🗺</Text>
-                        {/* <MapView provider="google" region={{
+                        <MapView provider="google" region={{
                             latitude: latitude,
                             longitude: longitude,
                             latitudeDelta: 0.2,
                             longitudeDelta: 0.2,
                         }} showsUserLocation={true} style={styles.map} >
-                        </MapView> */}
+                        </MapView>
                     </View>
 
                     <View style={[styles.card, { marginTop: 10 }]}>
