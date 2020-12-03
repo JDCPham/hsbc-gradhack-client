@@ -68,7 +68,7 @@ function Main(props: any) {
             <Tab.Screen name="Create" children={() => <CreateActivity navigation={props.navigation}></CreateActivity>} />
             <Tab.Screen name="Wallet" children={() => <Wallet navigation={props.navigation}></Wallet>} />
             <Tab.Screen name="Profile" children={() => <Profile navigation={props.navigation}></Profile>} />
-            <Tab.Screen name="Preferences" children={() => <Preferences navigation={props.navigation}></Preferences>} />
+            {/* <Tab.Screen name="Preferences" children={() => <Preferences navigation={props.navigation}></Preferences>} /> */}
         </Tab.Navigator>
 
     );
@@ -78,12 +78,26 @@ function screenOptions({ route }: any) {
     return {
         tabBarIcon: ({ focused, color, size }: any) => {
 
-            if (route.name === "Dashboard") return <FontAwesomeIcon icon={faHome} size={22} />
-            if (route.name === "Activities") return <FontAwesomeIcon icon={faSnowboarding} size={22} />
-            if (route.name === "Create") return <FontAwesomeIcon icon={faStar} size={22} />
-            if (route.name === "Wallet") return <FontAwesomeIcon icon={faWallet} size={22} />
-            if (route.name === "Preferences") return <FontAwesomeIcon icon={faCogs} size={22} />
-            if (route.name === "Profile") return <FontAwesomeIcon icon={faUserAlt} size={22} />
+            if (route.name === "Dashboard") {
+                if (focused) return <FontAwesomeIcon icon={faHome} size={32}/>
+                else return <FontAwesomeIcon icon={faHome} size={20}/>
+            }
+            if (route.name === "Activities") {
+                if (focused) return <FontAwesomeIcon icon={faSnowboarding} size={32}/>
+                else return <FontAwesomeIcon icon={faSnowboarding} size={20}/>
+            }
+            if (route.name === "Create") {
+                if (focused) return <FontAwesomeIcon icon={faStar} size={32}/>
+                else return <FontAwesomeIcon icon={faStar} size={20}/>
+            }
+            if (route.name === "Wallet") {
+                if (focused) return <FontAwesomeIcon icon={faWallet} size={32}/>
+                else return <FontAwesomeIcon icon={faWallet} size={20}/>
+            }
+            if (route.name === "Profile") {
+                if (focused) return <FontAwesomeIcon icon={faUserAlt} size={32}/>
+                else return <FontAwesomeIcon icon={faUserAlt} size={20}/>
+            }
 
             return <FontAwesomeIcon icon={faCoffee} />
         }
