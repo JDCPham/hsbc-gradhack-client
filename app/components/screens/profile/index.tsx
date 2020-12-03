@@ -154,7 +154,7 @@ function Profile(props: any) {
                     
                     
                     
-                    <View style={{ marginVertical: 50 }}></View>
+                    <View style={{ marginVertical: 60 }}></View>
                 </View>
             </ScrollView>
         </View>

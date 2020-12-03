@@ -39,10 +39,10 @@ function ActivityHistory(props: any) {
                 <Button style={[styles.mybtn, { marginBottom: 20, backgroundColor: Theme.black }]} labelStyle={{ color: Theme.primary, fontSize: 16, }} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
                 <Button style={[styles.mybtn, { backgroundColor: Theme.black }]} labelStyle={{ color: Theme.primary, fontSize: 16, }} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
                 <View style={[styles.btnContainer]}>
-                    <Button style={[ButtonStyle.btn, { justifyContent: 'center', width: '100%', flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="contained" onPress={() => navigation.navigate('final')}>Next</Button>
+                    <Button style={[ButtonStyle.btn, { justifyContent: 'center', width: '100%', flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="contained" onPress={() => navigation.navigate('final')}>Finish</Button>
                     <Button style={[ButtonStyle.btn, { width: '100%', justifyContent: 'center', flex: 1, marginTop: 10, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined" onPress={() => navigation.navigate('dashboard')}>Cancel</Button>
                 </View>
-                <View style={{ marginVertical: 50 }}></View>
+                <View style={{ marginVertical: 60 }}></View>
             </ScrollView>
         </View>
     )
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     Container: {
-        height: '80%',
         width: '100%',
         alignSelf: 'center',
         padding: 20,

@@ -26,6 +26,10 @@ function ActivityHistory(props: any) {
                 <View style={styles.activityContainer}>
                     <Text>Your activity has been setup</Text>
                 </View>
+                <View style={styles.activityContainer}>
+                    <Text>Your purposed activity is under background check. You will be notified once get approved (sth. like this)</Text>
+                    <Text>Or maybe display a process flow or check flow</Text>
+                </View>
                 <View style={[styles.btnContainer]}>
                     <Button style={[styles.mybtn]} labelStyle={{color: Theme.black, fontWeight: '700', fontSize: 16}} mode="contained" onPress={() => navigation.navigate('dashboard')} uppercase={false}>Go To Home Page</Button>
                 </View>

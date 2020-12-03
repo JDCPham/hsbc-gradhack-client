@@ -90,7 +90,7 @@ function ActivityHistory(props: any) {
                     <Button style={[ButtonStyle.btn, { justifyContent: 'center', width: '100%', flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="contained" onPress={() => navigation.navigate('suggestion')}>Next</Button>
                     <Button style={[ButtonStyle.btn, { width:'100%', justifyContent: 'center', flex: 1, marginTop: 10, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined" onPress={() => navigation.navigate('dashboard')}>Cancel</Button>
                 </View>
-                <View style={{marginVertical: 30}}></View>
+                <View style={{marginVertical: 60}}></View>
             </ScrollView>
         </View>
     )
@@ -98,7 +98,6 @@ function ActivityHistory(props: any) {
 
 const styles = StyleSheet.create({
     Container: {
-        height: '80%',
         width: '100%',
         alignSelf: 'center',
         marginTop: 20,
