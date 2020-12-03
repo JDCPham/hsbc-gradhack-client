@@ -4,6 +4,7 @@ import { SafeAreaView, Text, View, StyleSheet, ScrollView } from 'react-native';
 /* Components */
 import Header from '../../../common/header';
 import MapView, { Marker } from 'react-native-maps';
+import { Chart, Line, Area, HorizontalAxis, VerticalAxis } from 'react-native-responsive-linechart'
 
 /* Theming */
 import Theme from '../../../../../styles/theme.style';
@@ -27,7 +28,41 @@ function ActivityHistory(props: any) {
             </View>
             <ScrollView style={[styles.Container]}>
                 <View style={[styles.plotContainer]}>
-                    <Text> Here is the forecasting plot</Text>
+                    <Text>Hitsorical Show-up rate for Chosen Categories</Text>
+                    <Chart
+                        style={{ height: 200, width: '100%' }}
+                        data={[
+                            { x: 1, y: 80 },
+                            { x: 2, y: 85 },
+                            { x: 3, y: 76 },
+                            { x: 4, y: 65 },
+                            { x: 5, y: 90 },
+                            { x: 6, y: 71 },
+                            { x: 7, y: 81 },
+                            { x: 8, y: 72 },
+                            { x: 9, y: 54 },
+                            { x: 10, y: 62 },
+                            { x: 11, y: 80 },
+                            { x: 12, y: 85 },
+                            { x: 13, y: 76 },
+                            { x: 14, y: 65 },
+                            { x: 15, y: 90 },
+                            { x: 16, y: 71 },
+                            { x: 17, y: 81 },
+                            { x: 18, y: 72 },
+                            { x: 19, y: 54 },
+                            { x: 20, y: 62 },
+                            { x: 21, y: 88 },
+                        ]}
+                        padding={{ left: 30, bottom: 15, right: 10, top: 10 }}
+                        xDomain={{ min: 1, max: 21 }}
+                        yDomain={{ min: 40, max: 100 }}
+                        >
+                        <VerticalAxis tickCount={6} theme={{ labels: { formatter: (v) => v.toFixed(1) } }} />
+                        <HorizontalAxis tickCount={5} />
+                        {/* <Area theme={{ gradient: { from: { color: '#ffa502' }, to: { color: '#ffa502', opacity: 0.4 } }}} /> */}
+                        <Line theme={{ stroke: { color: Theme.primary, width: 5 }, scatter: { default: { width: 4, height: 4, rx: 2 }} }} />
+                    </Chart>
                 </View>
                 <View style={[styles.plotContainer]}>
                     <Text> Here is the map plot</Text>
