@@ -73,11 +73,11 @@ function Dashboard(props: any) {
                     </View>
                     <View style={[Spacing.mt3, Spacing.mb1]}>
                         <View style={{ flexDirection: 'row' }}>
-                            <Text style={styles.title}>Upcoming Activities</Text>
+                            <Text style={styles.title}>My Activities</Text>
                             <Text style={styles.titleAlt}>🚀</Text>
                         </View>
 
-                        {activities.length <= 0 ? <View><Text style={styles.muted}>Currently no transactions</Text></View> : <View></View>}
+                        {activities.length <= 0 ? <View><Text style={styles.muted}>Currently no activities</Text></View> : <View></View>}
 
                         {activities.map((activity, i) => {
                             return (
