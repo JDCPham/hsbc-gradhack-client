@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, Text, View, StyleSheet, ScrollView, Linking } from 'react-native';
+import { SafeAreaView, Text, View, StyleSheet, ScrollView, Linking, Image} from 'react-native';
 
 /* Components */
 import Header from '../../../common/header';
@@ -30,6 +30,7 @@ function ActivityHistory(props: any) {
                     <Text style={[styles.sugText]}>
                         Suggestions from RESEARCH
                     </Text>
+                    <Image style={styles.logo} source={require('../../../../assets/animations/hsbc2.jpg')} />
                 </View>
                 <Text style={[styles.secTitle]}>Other Sources</Text>
                     <Button style={[styles.mybtn, {marginBottom: 20, backgroundColor: Theme.black}]} labelStyle={{color: Theme.primary, fontSize: 16,}} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
@@ -46,6 +47,13 @@ function ActivityHistory(props: any) {
 }
 
 const styles = StyleSheet.create({
+    logo: {
+        width: 50,
+        marginTop: 10,
+        alignSelf: 'flex-end',
+        height: 50,
+        resizeMode: 'contain',
+    },
     Container: {
         height: '80%',
         width: '100%',
@@ -84,7 +92,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 5,
         marginBottom: 10,
-        flexDirection: 'row',
+        // flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 20,
         height: 400,
