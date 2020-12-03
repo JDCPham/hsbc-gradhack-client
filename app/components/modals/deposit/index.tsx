@@ -45,10 +45,10 @@ function Deposit(props: any) {
                 <ScrollView style={{ width: '100%', paddingVertical: 30 }}>
                     <AmountSelector amount={amount} setAmount={setAmount} />
                     <View style={styles.inputContainer}>
-                        <TextInput label="Name on card" style={[InputStyle.input]} mode="outlined" theme={InputPaperTheme2} />
-                        <TextInput label="Card number" style={[InputStyle.input, SpacingStyle.mt1]} mode="outlined" theme={InputPaperTheme2} keyboardType="number-pad" />
-                        <TextInput label="Expiry date" style={[InputStyle.input, SpacingStyle.mt1]} mode="outlined" theme={InputPaperTheme2} keyboardType="number-pad" />
-                        <TextInput label="Security code" style={[InputStyle.input, SpacingStyle.mt1]} mode="outlined" theme={InputPaperTheme2} keyboardType="number-pad" />
+                        <TextInput label="Name on card" style={[InputStyle.input]} mode="outlined" theme={InputPaperTheme2} value="John Smith"/>
+                        <TextInput label="Card number" style={[InputStyle.input, SpacingStyle.mt1]} mode="outlined" theme={InputPaperTheme2} keyboardType="number-pad" value="0936 6477 8388 7465"/>
+                        <TextInput label="Expiry date" style={[InputStyle.input, SpacingStyle.mt1]} mode="outlined" theme={InputPaperTheme2} value="12/24"/>
+                        <TextInput label="Security code" style={[InputStyle.input, SpacingStyle.mt1]} mode="outlined" theme={InputPaperTheme2} keyboardType="number-pad" value="394"/>
                     </View>
                     <Button icon="creation" onPress={() => deposit(setIsLoading, amount, props)} style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginHorizontal: 20, marginTop: 40, borderColor: Theme.black, borderWidth: 2, backgroundColor: Theme.black }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="contained">Deposit</Button>
                     <Button icon="creation" onPress={() => props.setModalVisible(false)} style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginHorizontal: 20, marginTop: 10, borderColor: Theme.primary, borderWidth: 2, backgroundColor: Theme.primary }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="contained">Cancel</Button>

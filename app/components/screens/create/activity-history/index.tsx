@@ -3,6 +3,7 @@ import { SafeAreaView, Text, View, StyleSheet, ScrollView } from 'react-native';
 
 /* Components */
 import Header from '../../../common/header';
+import MapView, { Marker } from 'react-native-maps';
 
 /* Theming */
 import Theme from '../../../../../styles/theme.style';
@@ -13,6 +14,9 @@ import ButtonStyle from '../../../../../styles/button.style';
 function ActivityHistory(props: any) {
     // Get Naviation Object.
     const navigation = props.navigation;
+
+    const [latitude, setLatitude] = React.useState(51.52161943551172);
+    const [longitude, setLongitude] = React.useState(-0.12331380640133469);
 
     return (
         <View>
@@ -27,6 +31,13 @@ function ActivityHistory(props: any) {
                 </View>
                 <View style={[styles.plotContainer]}>
                     <Text> Here is the map plot</Text>
+                    <MapView provider="google" region={{
+                            latitude: latitude,
+                            longitude: longitude,
+                            latitudeDelta: 0.2,
+                            longitudeDelta: 0.2,
+                        }} showsUserLocation={true} style={styles.map} >
+                        </MapView>
                 </View>
                 <View style={[styles.card]}>
                     <Text style={[styles.detail]}>Local Population:</Text>
@@ -67,16 +78,20 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 5,
         marginBottom: 10,
-        height: 300,
+        // height: 300,
+        marginHorizontal: 20,
+        borderLeftWidth: 10,
+        borderLeftColor: Theme.primary
     },
     mapContainer: {
-        marginTop: 20,
+        // marginTop: 20,
         backgroundColor: Theme.primary,
-        height: 200,
+        // height: 200,
         width: '100%',
     },
     card: {
-        width: '80%',
+        width: '90%',
+        marginHorizontal: 20,
         alignSelf: 'center',
         backgroundColor: Theme.white,
         borderRadius: 5,
@@ -94,6 +109,13 @@ const styles = StyleSheet.create({
     },
     detail: {
         fontSize: 20,
+    },
+    map: {
+        width: '100%',
+        height: 300,
+        marginTop: 20,
+        borderWidth: 6,
+        borderColor: Theme.primary
     },
     btnContainer: {
         width: '80%',
