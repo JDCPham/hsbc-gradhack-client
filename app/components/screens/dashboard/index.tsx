@@ -99,7 +99,7 @@ function Dashboard(props: any) {
 
                     </View>
 
-                    <View style={{ marginVertical: 10 }}></View>
+                    <View style={{ marginVertical: 20 }}></View>
                 </View>
             </ScrollView>
         </View>
