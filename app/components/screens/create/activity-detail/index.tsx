@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, Text, View, StyleSheet, RefreshControl } from 'react-native';
-import { TextInput } from 'react-native';
+import { SafeAreaView, Text, View, StyleSheet, RefreshControl, ScrollView } from 'react-native';
+import { TextInput } from 'react-native-paper';
 
 /* Components */
 import Header from '../../../common/header';
 
 /* Theming */
-import Theme from '../../../../../styles/theme.style';
 import { Button } from 'react-native-paper';
-import {OutlinedButtonPaperTheme} from '../../../../../styles/paper.style';
+import { ContainedButtonPaperTheme, OutlinedButtonPaperTheme } from '../../../../../styles/paper.style';
+import Theme from '../../../../../styles/theme.style';
+import InputStyle from '../../../../../styles/input.style';
+import SpacingStyle from '../../../../../styles/spacing.style';
+import ButtonStyle from '../../../../../styles/button.style';
+import { InputPaperTheme } from '../../../../../styles/paper.style';
 
 function ActivityDetail(props: any) {
 
@@ -22,22 +26,24 @@ function ActivityDetail(props: any) {
                     <Header navigation={props.navigation} />
                 </SafeAreaView>
             </View>
-            <View style={[styles.inputContainer]}>
-                <TextInput style={[styles.inputText]} placeholder='Activity Name'></TextInput>
-                <TextInput style={[styles.inputText]} placeholder='Host Name'></TextInput>
-                <TextInput style={[styles.inputText]} placeholder='Image URL'></TextInput>
-                <TextInput style={[styles.inputText]} placeholder='Location'></TextInput>
-                <TextInput style={[styles.inputText]} placeholder='Postcode'></TextInput>
-                <TextInput style={[styles.inputText]} placeholder='Event Fee'></TextInput>
-                <TextInput style={[styles.inputText]} placeholder='Penalty Fee'></TextInput>
-                <TextInput style={[styles.inputText]} placeholder='Date and Time'></TextInput>
-                <TextInput style={[styles.inputText]} placeholder='Virtual or Onsite'></TextInput>
-                <TextInput style={[styles.inputText]} placeholder= 'Category' ></TextInput>
-            </View>
-            <View style={[styles.btnContainer]}>
-                <Button style={[styles.mybtn, {backgroundColor: Theme.primary}]} labelStyle={{color: Theme.black, fontWeight: '700', fontSize: 16, letterSpacing: 2 }} mode="contained" onPress={() => navigation.navigate('history')}>Next</Button>
-                <Button style={[styles.mybtn, {marginTop: 20, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{fontWeight: '700', fontSize: 16, letterSpacing: 2 }} mode="outlined" onPress={() => navigation.navigate('dashboard')}>Cancel</Button>
-            </View>
+            <ScrollView>
+                <View style={[styles.inputContainer]}>
+                    <TextInput label="💌 ACTIVITY NAME" style={[InputStyle.input, styles.customInput]} mode="outlined" theme={InputPaperTheme} />
+                    <TextInput label="🔑 HOST NAME" style={[InputStyle.input, SpacingStyle.mt1, styles.customInput]} mode="outlined" theme={InputPaperTheme} />
+                    <TextInput label="🏙 IMAGE" style={[InputStyle.input, SpacingStyle.mt1, styles.customInput]} mode="outlined" theme={InputPaperTheme} />
+                    <TextInput label="📍 LOCATION" style={[InputStyle.input, SpacingStyle.mt1, styles.customInput]} mode="outlined" theme={InputPaperTheme} />
+                    <TextInput label="💰 EVENT FEE" style={[InputStyle.input, SpacingStyle.mt1, styles.customInput]} mode="outlined" theme={InputPaperTheme} />
+                    <TextInput label="🗓 DATE AND TIME" style={[InputStyle.input, SpacingStyle.mt1, styles.customInput]} mode="outlined" theme={InputPaperTheme} />
+                    <TextInput label="💻 VIRTUAL OR PHYSICAL" style={[InputStyle.input, SpacingStyle.mt1, styles.customInput]} mode="outlined" theme={InputPaperTheme} />
+                    <TextInput label="📁 CATEGORY" style={[InputStyle.input, SpacingStyle.mt1, styles.customInput]} mode="outlined" theme={InputPaperTheme} />
+
+                </View>
+                <View style={[styles.btnContainer]}>
+                    <Button style={[ButtonStyle.btn, { justifyContent: 'center', width: '100%', flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="contained" onPress={() => navigation.navigate('history')}>Next</Button>
+                    <Button style={[ButtonStyle.btn, { width:'100%', justifyContent: 'center', flex: 1, marginTop: 10, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined" onPress={() => navigation.navigate('dashboard')}>Cancel</Button>
+                </View>
+                <View style={{marginVertical: 50}}></View>
+            </ScrollView>
         </View>
     )
 }
@@ -45,12 +51,16 @@ function ActivityDetail(props: any) {
 const styles = StyleSheet.create({
     inputText: {
         fontSize: 20,
-        height: 40, 
+        height: 40,
         backgroundColor: '#C4C4C4',
         borderRadius: 10,
         marginTop: 10,
         paddingLeft: 20,
         paddingRight: 20,
+    },
+    customInput: {
+        width: '100%',
+        backgroundColor: Theme.white
     },
     inputContainer: {
         width: '80%',
