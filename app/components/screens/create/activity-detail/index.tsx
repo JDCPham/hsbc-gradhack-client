@@ -7,7 +7,7 @@ import Header from '../../../common/header';
 
 /* Theming */
 import { Button } from 'react-native-paper';
-import { OutlinedButtonPaperTheme } from '../../../../../styles/paper.style';
+import { ContainedButtonPaperTheme, OutlinedButtonPaperTheme } from '../../../../../styles/paper.style';
 import Theme from '../../../../../styles/theme.style';
 import InputStyle from '../../../../../styles/input.style';
 import SpacingStyle from '../../../../../styles/spacing.style';
@@ -39,9 +39,10 @@ function ActivityDetail(props: any) {
 
                 </View>
                 <View style={[styles.btnContainer]}>
-                    <Button style={[styles.mybtn, { backgroundColor: Theme.primary }]} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 16, letterSpacing: 2 }} mode="contained" onPress={() => navigation.navigate('history')}>Next</Button>
-                    <Button style={[styles.mybtn, { marginTop: 20, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ fontWeight: '700', fontSize: 16, letterSpacing: 2 }} mode="outlined" onPress={() => navigation.navigate('dashboard')}>Cancel</Button>
+                    <Button style={[ButtonStyle.btn, { justifyContent: 'center', width: '100%', flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="contained" onPress={() => navigation.navigate('history')}>Next</Button>
+                    <Button style={[ButtonStyle.btn, { width:'100%', justifyContent: 'center', flex: 1, marginTop: 10, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined" onPress={() => navigation.navigate('dashboard')}>Cancel</Button>
                 </View>
+                <View style={{marginVertical: 50}}></View>
             </ScrollView>
         </View>
     )
