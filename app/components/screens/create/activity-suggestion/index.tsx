@@ -90,7 +90,7 @@ function ActivityHistory(props: any) {
                         To learn more about our services, please go to HSBC website.
                     </Text>
                     <View>
-                        <Button style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, borderColor: '#111', borderWidth: 2, marginTop: 20 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined" >Go to HSBC Website</Button>
+                        <Button style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, borderColor: '#111', borderWidth: 2, marginTop: 20 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined" onPress={() => {Linking.openURL('https://www.hsbc.com.cn/')}} >Go to HSBC Website</Button>
                     </View>
                 </View>
                 <View style={[styles.btnContainer]}>
