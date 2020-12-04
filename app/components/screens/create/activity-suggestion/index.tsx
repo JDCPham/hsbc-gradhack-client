@@ -58,12 +58,18 @@ function ActivityHistory(props: any) {
                     <Text style={styles.title}>We Can Help You</Text>
                     <Text style={[styles.title, { backgroundColor: Theme.primary }]}>🎓</Text>
                 </View>
-                <View></View>
+                <View>
+                    <Text style={[styles.sugText]}>
+                        {'\n'}
+                        There are many things we can do.
+                    </Text>
+                    {/* <Image style={[styles.ImageContainer]} source={require('../../../../assets/businesses/bounce-back-loan-scheme.jpg')} /> */}
+                </View>
                 <View style={[styles.card]}>
                     <Text style={[styles.sugText]}>
                         We know the impact of COVID-19 on your business, check out our pandamic relief aids.
                     </Text>
-                    {/* <Image style={[styles.ImageContainer]} source={require('../../../../assets/businesses/bounce-back-loan-scheme.jpg')} /> */}
+                    <Image style={[styles.ImageContainer]} source={require('../../../../assets/businesses/emp-law.jpg')} />
                     <Text style={[styles.secTitle]}
                         onPress={() => { showCOVID19 == true ? setShowCOVID19(false) : setShowCOVID19(true) }}
                     >Learn More
@@ -74,7 +80,7 @@ function ActivityHistory(props: any) {
                     <Text style={[styles.sugText]}>
                         We can help digitalise your business. Check out our cloud-based finance services with supported functions such as payroll management.
                     </Text>
-                    {/* <Image style={[styles.ImageContainer]} source={require('../../../../assets/businesses/emp-law.jpg')} /> */}
+                    <Image style={[styles.ImageContainer]} source={require('../../../../assets/businesses/bounce-back-loan-scheme.jpg')} />
                     <Text style={[styles.secTitle]}
                         onPress={() => { showDigital == true ? setShowDigital(false) : setShowDigital(true) }}
                     >Learn More
@@ -108,8 +114,9 @@ const styles = StyleSheet.create({
     },
     ImageContainer: {
         width: '100%',
-        height: '45%',
+        height: 160,
         marginTop: 10,
+        padding: 10,
         alignSelf: 'flex-end',
         resizeMode: 'contain',
     },
