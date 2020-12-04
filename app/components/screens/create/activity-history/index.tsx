@@ -28,9 +28,10 @@ function ActivityHistory(props: any) {
             </View>
             <ScrollView style={[styles.Container]}>
                 <View style={[styles.plotContainer]}>
-                    <Text>Hitsorical Show-up rate for Chosen Categories</Text>
+                    <Text style={{fontSize: 20, fontWeight: '600'}}>Historic Attendance Rate</Text>
+                    <Text style={{marginTop: 5}}>Previous attendance rates in your local area in the past months</Text>
                     <Chart
-                        style={{ height: 200, width: '100%' }}
+                        style={{ height: 200, width: '100%', marginTop: 20 }}
                         data={[
                             { x: 1, y: 80 },
                             { x: 2, y: 85 },
@@ -65,7 +66,8 @@ function ActivityHistory(props: any) {
                     </Chart>
                 </View>
                 <View style={[styles.plotContainer]}>
-                    <Text> Here is the map plot</Text>
+                <Text style={{fontSize: 20, fontWeight: '600'}}>Sphere of Influence</Text>
+                    <Text style={{marginTop: 5}}>A prediction of your event's local outreach</Text>
                     <MapView provider="google" region={{
                             latitude: latitude,
                             longitude: longitude,
@@ -75,16 +77,19 @@ function ActivityHistory(props: any) {
                         </MapView>
                 </View>
                 <View style={[styles.card]}>
-                    <Text style={[styles.detail]}>Local Population:</Text>
-                    <Text style={[styles.detail]}>9.3m</Text>
+                    <Text style={{fontSize: 32}}>👤</Text>
+                    <Text style={[styles.detail, {fontSize: 20, fontWeight: '600', marginTop: 15}]}>Local Population</Text>
+                    <Text style={[styles.detail, {fontSize: 34, fontWeight: '700'}]}>9.3m</Text>
                 </View>
                 <View style={[styles.card]}>
-                    <Text style={[styles.detail]}>No. Recent Similar Activities:</Text>
-                    <Text style={[styles.detail]}>6</Text>
+                    <Text style={{fontSize: 32}}>🙈</Text>
+                    <Text style={[styles.detail, {fontSize: 20, fontWeight: '600', marginTop: 15}]}>Recent number of activities</Text>
+                    <Text style={[styles.detail, {fontSize: 34, fontWeight: '700'}]}>6</Text>
                 </View>
                 <View style={[styles.card]}>
-                    <Text style={[styles.detail]}>Expected Show Up People:</Text>
-                    <Text style={[styles.detail]}>79</Text>
+                    <Text style={{fontSize: 32}}>🙌🏻</Text>
+                    <Text style={[styles.detail, {fontSize: 20, fontWeight: '600', marginTop: 15}]}>Expected attendance</Text>
+                    <Text style={[styles.detail, {fontSize: 34, fontWeight: '700'}]}>79</Text>
                 </View>
                 <View style={[styles.btnContainer]}>
                     <Button style={[ButtonStyle.btn, { justifyContent: 'center', width: '100%', flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="contained" onPress={() => navigation.navigate('suggestion')}>Next</Button>
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
     Container: {
         width: '100%',
         alignSelf: 'center',
-        marginTop: 20,
+        paddingTop: 20
     },
     plotContainer: {
         padding: 20,
@@ -137,8 +142,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 5,
         marginBottom: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        // flexDirection: 'row',
+        // justifyContent: 'space-between',
+        alignItems: 'center',
         padding: 10,
     },
     detail: {
@@ -152,11 +158,12 @@ const styles = StyleSheet.create({
         borderColor: Theme.primary
     },
     btnContainer: {
-        width: '80%',
+        width: '100%',
         alignItems: 'center',
         alignSelf: 'center',
         paddingTop: 20,
-        paddingBottom: 20
+        paddingBottom: 20,
+        paddingHorizontal: 20
     },
     mybtn: {
         width: '50%',

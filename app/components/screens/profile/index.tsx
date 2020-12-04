@@ -25,7 +25,7 @@ import { faCheck, faCheckCircle, faCircle } from '@fortawesome/free-solid-svg-ic
 function Profile(props: any) {
 
     /* Hooks */
-    const [isLoading, setIsLoading] = React.useState(true);
+    const [isLoading, setIsLoading] = React.useState(false);
     const [preferences, setPreferences] = React.useState({
         food: true,
         music: false,
@@ -41,8 +41,13 @@ function Profile(props: any) {
         virtual: true
     })
 
+    if (isLoading) return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Theme.primary }}>
+            <ActivityIndicator size="large" color={Theme.black} />
+        </View>
+    )
 
-    return (
+    else return (
         <View>
             <View style={{ backgroundColor: Theme.black }}>
                 <SafeAreaView>
@@ -138,7 +143,7 @@ function Profile(props: any) {
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <Button icon="shield-alert" style={[ButtonStyle.btn, { justifyContent: 'center', marginTop: 30, flex: 1, }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 16, letterSpacing: 2 }} mode="contained">Save profile</Button>
+                        <Button icon="shield-alert" style={[ButtonStyle.btn, { justifyContent: 'center', marginTop: 30, flex: 1, }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 16, letterSpacing: 2 }} mode="contained" onPress={() => save(setIsLoading)}>Save profile</Button>
                     </View>
                     <View>
                         <Button icon="creation" style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, borderColor: '#111', borderWidth: 2, marginTop: 10 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined" onPress={() => props.navigation.navigate("Login")}>Log out</Button>
@@ -159,6 +164,16 @@ function Profile(props: any) {
             </ScrollView>
         </View>
     );
+}
+
+function save(setIsLoading: any): void {
+    console.log("saving");
+    setIsLoading(true);
+    new Promise(function(resolve) {
+        setTimeout(resolve, 200);
+    }).then(res => {
+        setIsLoading(false)
+    })
 }
 
 

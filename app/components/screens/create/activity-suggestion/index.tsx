@@ -16,10 +16,10 @@ function ActivityHistory(props: any) {
 
     function showTextCOVID19() {
         return <View>
-            <Text style={[styles.sugText]}>
-            Bounce Back Loan Scheme
+            <Text style={[styles.sugText, {marginTop: 20, marginBottom: 10, textAlign: 'center'}]}>
+                Bounce Back Loan Scheme
             {'\n'}
-            The Bounce Back Loan Scheme (BBLS) is designed to support small and medium-sized businesses who have been affected by coronavirus (COVID-19). 
+            The Bounce Back Loan Scheme (BBLS) is designed to support small and medium-sized businesses who have been affected by coronavirus (COVID-19).
             {'\n'}
             The Government guarantees 100% of the loan.
             </Text>
@@ -30,7 +30,7 @@ function ActivityHistory(props: any) {
 
     function showTextDigital() {
         return <View>
-            <Text style={[styles.sugText]}>
+            <Text style={[styles.sugText, {marginTop: 20, marginBottom: 10, textAlign: 'center'}]}>
                 About Payroll Software Integration:
                 {'\n'}
                 For HK users, call +852 2583 8033 to learn more about HSBC MPF
@@ -54,41 +54,45 @@ function ActivityHistory(props: any) {
                 </SafeAreaView>
             </View>
             <ScrollView style={[styles.Container]}>
-                <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.title}>We Can Help You</Text>
-                    <Text style={[styles.title, { backgroundColor: Theme.primary }]}>🎓</Text>
-                </View>
-                <View>
-                    <Text style={[styles.sugText]}>
-                        {'\n'}
-                        There are many things we can do.
-                    </Text>
-                    {/* <Image style={[styles.ImageContainer]} source={require('../../../../assets/businesses/bounce-back-loan-scheme.jpg')} /> */}
+                <View style={[styles.card]}>
+                    <Text style={{ fontSize: 50, textAlign: 'center', marginTop: -10 }}>🤝</Text>
+                    <Text style={{ fontSize: 24, fontWeight: '600', textAlign: 'center', marginTop: 10 }}>How we can help</Text>
+
                 </View>
                 <View style={[styles.card]}>
-                    <Text style={[styles.sugText]}>
-                        We know the impact of COVID-19 on your business, check out our pandamic relief aids.
+                    <Text style={{ fontSize: 50, textAlign: 'center', marginTop: -10 }}>🦠</Text>
+                    <Text style={{ fontSize: 24, fontWeight: '600', textAlign: 'center', marginTop: 10 }}>COVID-19</Text>
+                    <Text style={{ fontSize: 16, textAlign: 'center', marginTop: 10 }}>
+                        We understand the impacts of the Covid-19 pandemic on your business. Take a moment to look through our helpful resources and pandemic relief packages and.
                     </Text>
                     <Image style={[styles.ImageContainer]} source={require('../../../../assets/businesses/emp-law.jpg')} />
-                    <Text style={[styles.secTitle]}
-                        onPress={() => { showCOVID19 == true ? setShowCOVID19(false) : setShowCOVID19(true) }}
-                    >Learn More
-                    </Text>
+                    <View>
+                        <Button style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, borderColor: '#111', borderWidth: 2, marginTop: 20 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined" onPress={() => { showCOVID19 == true ? setShowCOVID19(false) : setShowCOVID19(true) }}>Learn more</Button>
+                    </View>
                     {showCOVID19 ? showTextCOVID19Compo : null}
                 </View>
                 <View style={[styles.card]}>
-                    <Text style={[styles.sugText]}>
+                    <Text style={{ fontSize: 50, textAlign: 'center', marginTop: -10 }}>📱</Text>
+                    <Text style={{ fontSize: 24, fontWeight: '600', textAlign: 'center', marginTop: 10 }}>Digitisation</Text>
+                    <Text style={{ fontSize: 16, textAlign: 'center', marginTop: 10 }}>
                         We can help digitalise your business. Check out our cloud-based finance services with supported functions such as payroll management.
                     </Text>
                     <Image style={[styles.ImageContainer]} source={require('../../../../assets/businesses/bounce-back-loan-scheme.jpg')} />
-                    <Text style={[styles.secTitle]}
-                        onPress={() => { showDigital == true ? setShowDigital(false) : setShowDigital(true) }}
-                    >Learn More
-                    </Text>
+                    <View>
+                        <Button style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, borderColor: '#111', borderWidth: 2, marginTop: 20 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined" onPress={() => { showDigital == true ? setShowDigital(false) : setShowDigital(true) }}>Learn more</Button>
+                    </View>
                     {showDigital ? showTextDigitalCompo : null}
                 </View>
-                <Text style={[styles.sugText]}>To learn more about our services, please go to HSBC website.</Text>
-                <Button style={[styles.mybtn, { backgroundColor: Theme.black }]} labelStyle={{ color: Theme.primary, fontSize: 16, }} mode="contained" uppercase={false} onPress={() => Linking.openURL('https://www.hsbc.com.cn/')}>HSBC Website</Button>
+                <View style={[styles.card]}>
+                    <Text style={{ fontSize: 50, textAlign: 'center', marginTop: -10 }}>🤔</Text>
+                    <Text style={{ fontSize: 24, fontWeight: '600', textAlign: 'center', marginTop: 10 }}>Find out more</Text>
+                    <Text style={{ fontSize: 16, textAlign: 'center', marginTop: 10 }}>
+                        To learn more about our services, please go to HSBC website.
+                    </Text>
+                    <View>
+                        <Button style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, borderColor: '#111', borderWidth: 2, marginTop: 20 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined" >Go to HSBC Website</Button>
+                    </View>
+                </View>
                 <View style={[styles.btnContainer]}>
                     <Button style={[ButtonStyle.btn, { justifyContent: 'center', width: '100%', flex: 1 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.primary, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="contained" onPress={() => navigation.navigate('final')}>Finish</Button>
                     <Button style={[ButtonStyle.btn, { width: '100%', justifyContent: 'center', flex: 1, marginTop: 10, borderColor: '#111', borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined" onPress={() => navigation.navigate('dashboard')}>Cancel</Button>
@@ -115,10 +119,12 @@ const styles = StyleSheet.create({
     ImageContainer: {
         width: '100%',
         height: 160,
-        marginTop: 10,
-        padding: 10,
+        marginTop: 20,
+        // padding: 10,
         alignSelf: 'flex-end',
-        resizeMode: 'contain',
+        resizeMode: 'cover',
+        borderWidth: 5,
+        borderColor: Theme.primary
     },
     title: {
         fontSize: 20,
@@ -161,7 +167,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     btnContainer: {
-        width: '80%',
+        width: '100%',
+        // paddingHorizontal: 20,
         alignSelf: 'center',
         alignItems: 'center',
         paddingTop: 20,

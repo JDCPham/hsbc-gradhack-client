@@ -128,8 +128,10 @@ function UpcomingPhysicalActivity(props: any) {
                     </View>
 
                     <Button icon="creation" onPress={() => props.setModalVisible(false)} style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginHorizontal: 20, marginTop: 50, borderColor: Theme.black, borderWidth: 2 }]} theme={OutlinedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} mode="outlined">Back to dashboard</Button>
-
-                    <Button icon="creation" onPress={() => props.setModalVisible(false)} style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginHorizontal: 20, marginTop: 20, borderColor: Theme.primary, borderWidth: 2, backgroundColor: Theme.primary }, canSignIn ? {} : { backgroundColor: Theme.lightGray, borderColor: Theme.lightGray, opacity: 0.4 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} disabled={true} mode="contained">Sign in to event</Button>
+                    {virtual ?  <Button icon="camcorder" onPress={() => props.setModalVisible(false)} style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginHorizontal: 20, marginTop: 20, borderColor: Theme.primary, borderWidth: 2, backgroundColor: Theme.primary }, canSignIn ? {} : { backgroundColor: '#008af5', borderColor: '#008af5', opacity: 0.4 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: '#fff', fontWeight: '700', fontSize: 14, letterSpacing: 2 }} disabled={true} mode="contained">Go to Zoom Session</Button> :
+                    <Button icon="login" onPress={() => props.setModalVisible(false)} style={[ButtonStyle.btn, { justifyContent: 'center', flex: 1, marginHorizontal: 20, marginTop: 20, borderColor: Theme.primary, borderWidth: 2, backgroundColor: Theme.primary }, canSignIn ? {} : { backgroundColor: Theme.lightGray, borderColor: Theme.lightGray, opacity: 0.4 }]} theme={ContainedButtonPaperTheme} labelStyle={{ color: Theme.black, fontWeight: '700', fontSize: 14, letterSpacing: 2 }} disabled={true} mode="contained">Sign in to event</Button>
+                    
+                    }
                     {canSignIn ? <View></View> : <View style={{ width: '100%', alignItems: 'flex-end', paddingRight: 20, marginTop: 5 }}>
                         <Text style={{ fontWeight: '600', color: 'red' }}>Sign in opens 1 hour before event time.</Text>
 
